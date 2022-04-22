@@ -3,7 +3,7 @@ const path = require("path");
 const uuid = require('uuid')
 
 class NewsController {
-  async createNews(req, res, next) {
+  async create(req, res, next) {
     try {
       let { title, author, body } = req.body
       const { img } = req.files
@@ -21,6 +21,16 @@ class NewsController {
     }
   }
 
+  async getOne(req, res, next) {
+    try {
+      const { id } = req.params
+      const news = await News.findByPk(id)
+      return res.json(news)
+    } catch (e) {
+      next(res.json(e.message))
+    }
+  }
+
   async getAll(req, res, next) {
     try {
       let { limit, page } = req.query
@@ -32,6 +42,17 @@ class NewsController {
     } catch (e) {
       next(res.json(e.message))
     }
+  }
+
+  async update(req, res) {
+    const {id} = req.params
+    const {title, author, body, img} = req.body
+    const news = await News.findByPk(id)
+    if (!news) {
+      throw new Error('Новость не найдена')
+    }
+    await news.update({title, author, body, img})
+    return res.json(news)
   }
 }
 
