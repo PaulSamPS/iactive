@@ -1,0 +1,55 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/node": "^16.11.27",
+    "@types/react": "^18.0.6",
+    "@types/react-dom": "^18.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.6.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/*",
+    "lint:fix": "eslint src/* --fix",
+    "stylelint": "stylelint \"**/*.scss\" --fix",
+    "lint:quiet": "eslint src/* --quiet"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "since 2018"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/sass": "^1.43.1",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint": "^8.10.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-jsdoc": "^37.9.5",
+    "eslint-plugin-react": "^7.29.2",
+    "prettier": "^2.6.2",
+    "sass": "^1.50.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-order-config-standard": "^0.1.3"
+  }
+}
