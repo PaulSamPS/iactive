@@ -6,6 +6,7 @@ const News = sequelize.define('news', {
     title: { type: DataTypes.TEXT, required: true },
     author: { type: DataTypes.STRING, required: true },
     body: { type: DataTypes.TEXT, required: true },
+    img: {type: DataTypes.STRING},
     prettyCreatedAt: {
         type: DataTypes.VIRTUAL,
         get() {

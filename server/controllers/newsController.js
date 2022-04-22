@@ -1,13 +1,19 @@
 const {News} = require('../models/models')
+const path = require("path");
+const uuid = require('uuid')
 
 class NewsController {
   async createNews(req, res, next) {
     try {
       let { title, author, body } = req.body
+      const { img } = req.files
+      let fileName = uuid.v4() + '.jpg'
+      await img.mv(path.resolve(__dirname, '..', 'static/author', fileName))
       const news = await News.create({
         title,
         author,
         body,
+        img: fileName
       })
       return res.status(200).send(news)
     } catch (e) {
