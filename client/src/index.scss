@@ -1,12 +1,19 @@
+@import-normalize;
 
 body {
-  margin: 0;
+  overflow-y: scroll;
+
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #E5E5E5;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 code {
@@ -16,5 +23,6 @@ code {
 
 :root {
   --grey: #808080;
+  --blue: #0088EE;
   --white: #ffffff;
 }

@@ -8,7 +8,7 @@
 
   .author {
     color: var(--grey);
-    @include flex;
+    //@include flex;
     gap: 20px;
 
     .avatar {
@@ -34,5 +34,9 @@
       height: 146px;
       width: 259px;
     }
+  }
+
+  .append {
+    fill: #61dafb;
   }
 }

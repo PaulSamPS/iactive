@@ -38,18 +38,18 @@ class FavouriteController {
     }
   }
 
-  async remove(req, res, next) {
+  async remove(req, res) {
     try {
-      let basketId
+      let favouriteId
       if (!req.signedCookies.favouriteId) {
         let created = await Favourite.create()
-        basketId = created.id
+        favouriteId = created.id
       } else {
-        basketId = parseInt(req.signedCookies.favouriteId)
+        favouriteId = parseInt(req.signedCookies.favouriteId)
       }
-      const basket = await favouriteService.remove(basketId, req.params.newsId)
-      res.cookie('basketId', basket.id, { maxAge, signed })
-      res.json(basket)
+      const favourite = await favouriteService.remove(favouriteId, req.params.newsId)
+      res.cookie('favouriteId', favourite.id, { maxAge, signed })
+      res.json(favourite)
     } catch (e) {
       res.json(e.message)
     }

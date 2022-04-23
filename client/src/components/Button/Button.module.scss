@@ -1,0 +1,39 @@
+@import './scss/index';
+
+.button {
+	padding: 10px 20px;
+
+	cursor: pointer;
+	transition: transform ease 0.2s;
+
+	color: var(--white);
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 17px;
+
+	@include flexCenterCenter;
+
+	&:active {
+		transform: translateY(2px);
+		box-shadow: 0 2px 5px 0 var(--blue);
+	}
+}
+
+.primary {
+	background: var(--blue);
+}
+
+.card {
+	width: 64px;
+	height: 28px;
+	background: transparent;
+	border: 1px solid var(--blue);
+	color: var(--blue);
+	border-radius: 2px;
+	font-size: 11px;
+	font-weight: 400;
+}
