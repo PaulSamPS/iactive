@@ -1,19 +1,21 @@
-const {News} = require('../models/models')
-const path = require("path");
+const { News } = require('../models/models')
+const path = require('path')
 const uuid = require('uuid')
 
 class NewsController {
   async create(req, res, next) {
     try {
       let { title, author, body } = req.body
-      const { img } = req.files
+      const { img, avatar } = req.files
       let fileName = uuid.v4() + '.jpg'
-      await img.mv(path.resolve(__dirname, '..', 'static/author', fileName))
+      await img.mv(path.resolve(__dirname, '..', 'static/news', fileName))
+      await avatar.mv(path.resolve(__dirname, '..', 'static/avatar', fileName))
       const news = await News.create({
         title,
         author,
         body,
-        img: fileName
+        img: fileName,
+        avatar: fileName,
       })
       return res.status(200).send(news)
     } catch (e) {
@@ -45,13 +47,13 @@ class NewsController {
   }
 
   async update(req, res) {
-    const {id} = req.params
-    const {title, author, body, img} = req.body
+    const { id } = req.params
+    const { title, author, body, img } = req.body
     const news = await News.findByPk(id)
     if (!news) {
       throw new Error('Новость не найдена')
     }
-    await news.update({title, author, body, img})
+    await news.update({ title, author, body, img })
     return res.json(news)
   }
 }
