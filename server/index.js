@@ -3,12 +3,14 @@ const express = require('express')
 const sequelize = require('./db')
 const cors = require('cors')
 const router = require('./routes/index')
-const path = require("path");
+const path = require('path')
 const fileUpload = require('express-fileupload')
+const cookieParser = require('cookie-parser')
 
 const PORT = process.env.PORT || 5000
 
 const app = express()
+app.use(cookieParser(process.env.SECRET_COOKIE))
 app.use(
   cors({
     credentials: true,

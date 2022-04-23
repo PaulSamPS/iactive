@@ -23,7 +23,6 @@ export const Card = () => {
             <StarIcon />
           </div>
           <img className={styles.image} src={`http://localhost:5000/news/${n.img}`} alt='aif' />
-          <span>{n.prettyCreatedAt}</span>
         </div>
       ))}
     </div>

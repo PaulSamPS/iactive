@@ -5,8 +5,6 @@ export interface INewsInterface {
   body: string;
   img: string;
   avatar: string;
-  prettyCreatedAt: string;
-  prettyUpdatedAt: string;
 }
 
 export interface IResponseNews {

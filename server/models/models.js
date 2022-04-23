@@ -8,27 +8,19 @@ const News = sequelize.define('news', {
   body: { type: DataTypes.TEXT, required: true },
   avatar: { type: DataTypes.STRING },
   img: { type: DataTypes.STRING },
-  prettyCreatedAt: {
-    type: DataTypes.VIRTUAL,
-    get() {
-      const value = this.getDataValue('createdAt')
-      const hours = value.getHours()
-      const minutes = value.getMinutes()
-      return (hours < 10 ? `0${hours}` : hours) + ':' + (minutes < 10 ? `0${minutes}` : minutes)
-    },
-  },
-  prettyUpdatedAt: {
-    type: DataTypes.VIRTUAL,
-    get() {
-      return this.getDataValue('updatedAt').toLocaleString('ru-RU')
-    },
-  },
 })
 
 const Favourite = sequelize.define('favourite', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 
+const FavouriteNews = sequelize.define('favourite_news', {})
+
+Favourite.belongsToMany(News, { through: FavouriteNews, onDelete: 'CASCADE' })
+News.belongsToMany(Favourite, { through: FavouriteNews, onDelete: 'CASCADE' })
+
 module.exports = {
   News,
+  Favourite,
+  FavouriteNews,
 }
