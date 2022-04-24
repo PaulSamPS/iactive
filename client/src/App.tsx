@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './layout/Layout';
-import { Favourite } from './components/Favourite/Favourite';
+import { Favourite } from './pages/Favourite/Favourite';
 import { Main } from './pages/Main/Main';
 
 export const App = () => {

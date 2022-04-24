@@ -7,8 +7,6 @@ export const Main = () => {
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.newsReducer);
 
-  console.log(news);
-
   React.useEffect(() => {
     dispatch(getNews());
     const timer = setInterval(() => {
@@ -16,6 +14,13 @@ export const Main = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  console.log(news);
+
+  if (news.length <= 0) {
+    return <h1>Не добалено ни одной новости...</h1>;
+  }
+
   return (
     <>
       {news.map((n) => (

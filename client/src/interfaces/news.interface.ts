@@ -5,6 +5,7 @@ export interface INewsInterface {
   body: string;
   img: string;
   avatar: string;
+  isFavourite: boolean;
   createdAt: string;
   updatedAt: string;
 }

@@ -16,7 +16,6 @@
 	line-height: 17px;
 
 	@include flexCenterCenter;
-
 }
 
 .primary {
@@ -34,9 +33,11 @@
 .card {
 	width: 64px;
 	height: 28px;
-	background: transparent;
-	border: 1px solid var(--blue);
+
 	color: var(--blue);
+	border: 1px solid var(--blue);
+	background: transparent;
+
 	font-size: 11px;
 	font-weight: 400;
 

@@ -5,7 +5,7 @@ const maxAge = 60 * 60 * 1000 * 24 * 365 // один год
 const signed = true
 
 class FavouriteController {
-  async getOne(req, res, next) {
+  async getOne(req, res) {
     try {
       let favourite
       if (req.signedCookies.favouriteId) {

@@ -2,12 +2,13 @@ import { AppDispatch } from '../store';
 import { newsReducer } from '../reducers/newsReducer';
 import { IResponseNews } from '../../interfaces/news.interface';
 import { IErrorResponse } from '../../interfaces/error.interface';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { $api } from '../../http/axios';
 
 export const getNews = () => async (dispatch: AppDispatch) => {
   dispatch(newsReducer.actions.setNewsLoading());
-  await axios
-    .get(`http://localhost:5000/api/news`)
+  await $api
+    .get(`/api/news`)
     .then((res: AxiosResponse<IResponseNews>) => {
       dispatch(newsReducer.actions.setNewsSuccess(res.data.rows));
     })

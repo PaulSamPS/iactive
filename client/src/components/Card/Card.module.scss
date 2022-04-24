@@ -1,91 +1,106 @@
 @import './scss/index';
 
 .wrapper {
-  width: 886px;
-  margin: 0 auto 30px;
-  background: var(--white);
-  border-radius: 5px;
-  padding: 15px;
-  gap: 10px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-  display: grid;
-  grid-template-columns: 36px 1fr auto auto;
-  grid-template-areas:
-    'avatar title buttons icons'
-    'time body body body'
-    '. image image image';
+	display: grid;
 
+	width: 886px;
+	margin: 0 auto 30px;
+	padding: 15px;
 
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      grid-area: avatar;
-    }
+	border-radius: 5px;
+	background: var(--white);
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+	gap: 10px;
+	grid-template-columns: 36px 1fr auto auto;
+	grid-template-areas:
+		'avatar title buttons icons'
+		'time body body body'
+		'. image image image';
 
-    .title {
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 13px;
-      grid-area: title;
-      color: var(--grey);
-      align-self: center;
+	.avatar {
+		width: 36px;
+		height: 36px;
 
+		border-radius: 50%;
+		grid-area: avatar;
+	}
 
-      .comment {
-        margin-top: 5px;
-        font-style: italic;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 9px;
-        color: var(--grey);
+	.title {
+		align-self: center;
 
-      }
-    }
+		color: var(--grey);
 
-    .position {
-      @include flex;
-      column-gap: 15px;
-      grid-area: buttons;
-      margin-right: 30px;
-    }
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 13px;
+		grid-area: title;
+	}
 
-    .icons {
-      @include flex;
-      column-gap: 10px;
-      grid-area: icons;
+	.position {
+		@include flex;
+		margin-right: 30px;
+		column-gap: 15px;
+		grid-area: buttons;
+	}
 
-      svg {
+	.icons {
+		@include flex;
+		column-gap: 10px;
+		grid-area: icons;
+
+		svg {
+			cursor: pointer;
+			transition: all ease 0.2s;
+
+			&:hover {
+				transform: scale(1.2);
+				fill: var(--blue);
+				stroke: var(--blue);
+			}
+
+			&:active {
+				transform: translateY(2px);
+			}
+		}
+	}
+
+	.append {
+		fill: var(--blue);
+	}
+
+	.time {
+		color: var(--grey);
+
+		font-size: 14px;
+		grid-area: time;
+	}
+
+	.body {
+		margin: 0;
+		grid-area: body;
+	}
+
+	.image {
+      @include flexColumn;
+      align-items: unset;
+		grid-area: image;
+
+      span {
         cursor: pointer;
+        color: var(--grey);
+        margin-bottom: 10px;
         transition: all ease .2s;
 
         &:hover {
-          transform: scale(1.2);
-          fill: var(--blue);
-          stroke: var(--blue);
+            color: var(--blue);
         }
       }
-    }
 
-  .append {
-    fill: var(--blue);
-  }
-
-
-    .time {
-      font-size: 14px;
-      color: var(--grey);
-      grid-area: time;
-    }
-
-    .body {
-      margin: 0;
-      grid-area: body;
-    }
-
-  .image {
-    grid-area: image;
-    height: 146px;
-    width: 259px;
-  }
+      img {
+        width: 259px;
+        height: 146px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+	}
 }

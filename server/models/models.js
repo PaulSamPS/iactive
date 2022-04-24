@@ -8,6 +8,7 @@ const News = sequelize.define('news', {
   body: { type: DataTypes.TEXT, required: true },
   avatar: { type: DataTypes.STRING },
   img: { type: DataTypes.STRING },
+  isFavourite: { type: DataTypes.BOOLEAN, defaultValue: false },
 })
 
 const Favourite = sequelize.define('favourite', {

@@ -1,15 +1,34 @@
 const { Favourite, News, FavouriteNews } = require('../models/models')
 
+const pretty = (favourite) => {
+  const data = {}
+  data.id = favourite.id
+  data.news = []
+  if (favourite.news) {
+    data.news = favourite.news.map((item) => {
+      return {
+        id: item.id,
+        title: item.name,
+        author: item.author,
+        body: item.body,
+        avatar: item.avatar,
+        img: item.img,
+      }
+    })
+  }
+  return data
+}
+
 class FavouriteService {
   async getFavourite(favouriteId) {
-    let basket = await Favourite.findByPk(favouriteId, {
+    let favourite = await Favourite.findByPk(favouriteId, {
       attributes: ['id'],
       include: [{ model: News, attributes: ['id', 'title', 'author', 'body', 'avatar', 'img'] }],
     })
-    if (!basket) {
-      basket = await Favourite.create()
+    if (!favourite) {
+      favourite = await Favourite.create()
     }
-    return basket
+    return pretty(favourite)
   }
 
   async append(favouriteId, newsId, res) {
@@ -20,13 +39,13 @@ class FavouriteService {
     if (!favourite) {
       favourite = await Favourite.create()
     }
-    const favouriteReq = await Favourite.findByPk(newsId)
-    if (!favouriteReq) {
-      res.status(500).send('Новости с таким id не найдено')
-    }
     await FavouriteNews.create({ favouriteId, newsId })
+    const news = await News.findByPk(newsId)
+    console.log(news)
+    news.isFavourite = true
+    await news.save()
     await favourite.reload()
-    return favourite
+    return pretty(favourite)
   }
 
   async remove(favouriteId, newsId) {
@@ -43,7 +62,7 @@ class FavouriteService {
       await favouriteNews.destroy()
       await favourite.reload()
     }
-    return favourite
+    return pretty(favourite)
   }
 }
 
