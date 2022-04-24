@@ -5,6 +5,8 @@ export interface INewsInterface {
   body: string;
   img: string;
   avatar: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IResponseNews {

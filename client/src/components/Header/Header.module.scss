@@ -2,6 +2,7 @@
 
 .wrapper {
   background: var(--white);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
 
   .container {
     max-width: 990px;
@@ -29,7 +30,7 @@
         column-gap: 5px;
         font-weight: 700;
         cursor: pointer;
-        color: var(--grey);
+        color: var(--grey-light);
         transition: all ease .2s;
 
         svg {

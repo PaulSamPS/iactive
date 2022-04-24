@@ -2,41 +2,90 @@
 
 .wrapper {
   width: 886px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   background: var(--white);
-  padding: 10px;
+  border-radius: 5px;
+  padding: 15px;
+  gap: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  display: grid;
+  grid-template-columns: 36px 1fr auto auto;
+  grid-template-areas:
+    'avatar title buttons icons'
+    'time body body body'
+    '. image image image';
 
-  .author {
-    color: var(--grey);
-    //@include flex;
-    gap: 20px;
 
     .avatar {
       width: 36px;
       height: 36px;
       border-radius: 50%;
+      grid-area: avatar;
     }
 
-    .name {
+    .title {
       font-weight: 400;
       font-size: 16px;
       line-height: 13px;
+      grid-area: title;
+      color: var(--grey);
+      align-self: center;
+
 
       .comment {
+        margin-top: 5px;
         font-style: italic;
         font-weight: 400;
         font-size: 12px;
         line-height: 9px;
+        color: var(--grey);
+
       }
     }
 
-    .image {
-      height: 146px;
-      width: 259px;
+    .position {
+      @include flex;
+      column-gap: 15px;
+      grid-area: buttons;
+      margin-right: 30px;
     }
-  }
+
+    .icons {
+      @include flex;
+      column-gap: 10px;
+      grid-area: icons;
+
+      svg {
+        cursor: pointer;
+        transition: all ease .2s;
+
+        &:hover {
+          transform: scale(1.2);
+          fill: var(--blue);
+          stroke: var(--blue);
+        }
+      }
+    }
 
   .append {
-    fill: #61dafb;
+    fill: var(--blue);
+  }
+
+
+    .time {
+      font-size: 14px;
+      color: var(--grey);
+      grid-area: time;
+    }
+
+    .body {
+      margin: 0;
+      grid-area: body;
+    }
+
+  .image {
+    grid-area: image;
+    height: 146px;
+    width: 259px;
   }
 }

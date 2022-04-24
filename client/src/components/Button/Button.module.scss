@@ -4,11 +4,11 @@
 	padding: 10px 20px;
 
 	cursor: pointer;
-	transition: transform ease 0.2s;
+	transition: all ease 0.2s;
 
 	color: var(--white);
 	border: none;
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
 
 	font-size: 14px;
@@ -17,14 +17,18 @@
 
 	@include flexCenterCenter;
 
-	&:active {
-		transform: translateY(2px);
-		box-shadow: 0 2px 5px 0 var(--blue);
-	}
 }
 
 .primary {
 	background: var(--blue);
+
+	&:hover {
+		filter: brightness(1.1);
+	}
+
+	&:active {
+		transform: translateY(2px);
+	}
 }
 
 .card {
@@ -33,7 +37,10 @@
 	background: transparent;
 	border: 1px solid var(--blue);
 	color: var(--blue);
-	border-radius: 2px;
 	font-size: 11px;
 	font-weight: 400;
+
+	&:hover {
+		transform: scale(1.2);
+	}
 }
