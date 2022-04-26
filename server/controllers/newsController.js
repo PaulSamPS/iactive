@@ -1,6 +1,7 @@
 const { News } = require('../models/models')
 const path = require('path')
 const uuid = require('uuid')
+const fs = require('fs')
 
 class NewsController {
   async create(req, res, next) {
@@ -89,6 +90,23 @@ class NewsController {
       await news.update({ body })
     }
     return res.json(news)
+  }
+
+  async remove(req, res) {
+    const { id, avatar, img } = req.params
+    const news = await News.findByPk(id)
+    if (news) {
+      fs.unlink(path.resolve(__dirname, '..', 'static/avatar', avatar), function (err) {
+        if (err) throw err
+        console.log('file deleted')
+      })
+      fs.unlink(path.resolve(__dirname, '..', 'static/news', img), function (err) {
+        if (err) throw err
+        console.log('file deleted')
+      })
+      await news.destroy()
+    }
+    res.status(200).json('Продукт удалён')
   }
 }
 

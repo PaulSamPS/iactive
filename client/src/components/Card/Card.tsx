@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addToFavouriteNews, removeFromFavouriteNews } from '../../redux/actions/favouriteAction';
 import 'moment/locale/ru';
 import { AppendNews } from '../../layout/Header/AppendNews/AppendNews';
+import { deleteNews } from '../../redux/actions/newsAction';
 
 export const Card = ({ news, ...props }: CardProps): JSX.Element => {
   const { sortBy } = useAppSelector((state) => state.sortReducer);
@@ -37,11 +38,18 @@ export const Card = ({ news, ...props }: CardProps): JSX.Element => {
     setUpdate(true);
   };
 
+  const handleDelete = async (newsId: number, avatar: string, img: string) => {
+    await dispatch(deleteNews(newsId, avatar, img, sortBy));
+  };
+
   return (
     <div className={styles.wrapper} {...props}>
       <span className={styles.date}>{date}</span>
       <img className={styles.avatar} src={`http://localhost:5000/avatar/${news.avatar}`} alt={news.author} />
-      <div className={styles.title}>{news.author}</div>
+      <div className={styles.titleBlock}>
+        <div className={styles.author}>{news.author}</div>
+        <div className={styles.title}>{news.title}</div>
+      </div>
       <div className={styles.position}>
         <Button appearance='card'>Левый</Button>
         <Button appearance='card'>Центр</Button>
@@ -49,7 +57,13 @@ export const Card = ({ news, ...props }: CardProps): JSX.Element => {
       </div>
       <div className={styles.icons}>
         <ArrowIcon />
-        <SettingsIcon onClick={handleUpdate} />
+        <div className={styles.favouriteBlock}>
+          <SettingsIcon />
+          <div className={cn(styles.dropdownContent, styles.settings)}>
+            <span onClick={handleUpdate}>Изменить</span>
+            <span onClick={() => handleDelete(news.id, news.avatar, news.img)}>Удалить</span>
+          </div>
+        </div>
         <RectangleIcon />
         <div className={styles.favouriteBlock}>
           <StarIcon

@@ -28,15 +28,18 @@
 		grid-area: avatar;
 	}
 
-	.title {
-		align-self: center;
-
+	.titleBlock {
+		grid-area: title;
 		color: var(--grey);
 
 		font-size: 16px;
 		font-weight: 400;
 		line-height: 13px;
-		grid-area: title;
+		display: grid;
+		align-items: center;
+		.author {
+
+		}
 	}
 
 	.position {
@@ -62,6 +65,12 @@
 				}
 			}
 
+			.settings {
+				bottom: -85px !important;
+				background: var(--grey);
+				width: 100px !important;
+			}
+
 			.dropdownContent {
 				position: absolute;
 				z-index: 1;
@@ -70,16 +79,17 @@
 
 				display: none;
 
-				min-width: 200px;
+				width: 200px;
 
 				border-radius: 5px;
 				background: var(--white);
-				box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+				box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
 
 				span {
 					display: block;
 
 					padding: 12px 16px;
+					min-width: 200px;
 
 					cursor: pointer;
 					transition: all ease 0.2s;

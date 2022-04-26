@@ -75,15 +75,6 @@ export const AppendNews = ({ modal, setModal, update, newsId, setUpdate }: Appen
     <Modal modal={modal} setModal={setModal}>
       <h2 className={styles.title}>{update ? 'Обновить' : 'Добавить'} новость</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.append}>
-        <label htmlFor='title'>
-          Название:
-          <Input
-            {...register('title', { required: { value: !update, message: 'Введите название новости' } })}
-            placeholder='Введите название новости'
-            type='text'
-            error={errors.title}
-          />
-        </label>
         {previewAvatar.length > 0 && (
           <label htmlFor='previewAvatar'>
             Предпросмотр:
@@ -128,6 +119,15 @@ export const AppendNews = ({ modal, setModal, update, newsId, setUpdate }: Appen
             placeholder='Укажите автора новости'
             type='text'
             error={errors.author}
+          />
+        </label>
+        <label htmlFor='title'>
+          Название:
+          <Input
+            {...register('title', { required: { value: !update, message: 'Введите название новости' } })}
+            placeholder='Введите название новости'
+            type='text'
+            error={errors.title}
           />
         </label>
         {previewNews.length > 0 && (

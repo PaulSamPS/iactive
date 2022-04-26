@@ -24,3 +24,8 @@ export const createNews = (formdata: FormData) => async (dispatch: AppDispatch) 
 export const updateNews = (formdata: FormData, id: number | undefined) => async (dispatch: AppDispatch) => {
   await $api.put(`/api/news/update/${id}`, formdata);
 };
+
+export const deleteNews = (newsId: number | undefined, avatar: string, img: string, sortBy: string) => async (dispatch: AppDispatch) => {
+  await $api.delete(`/api/news/delete/${newsId}/${avatar}/${img}`);
+  await dispatch(getNews(sortBy));
+};

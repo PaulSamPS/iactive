@@ -24,7 +24,14 @@ export const Favourite = (): JSX.Element => {
   }
 
   if (favouriteNews.length <= 0) {
-    return <h2 className={styles.notFound}>Вы пока ничего не добавили в избранное</h2>;
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.back} onClick={() => navigate('/')}>
+          <ArrowIcon /> На главную
+        </div>
+        <h2 className={styles.notFound}>Вы пока ничего не добавили в избранное</h2>;
+      </div>
+    );
   }
 
   return (
