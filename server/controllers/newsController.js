@@ -63,16 +63,24 @@ class NewsController {
 
   async update(req, res) {
     const { id } = req.params
-    const { title, author, body } = req.body
+    const { title, author, body, avatarOld, imgOld } = req.body
     const news = await News.findByPk(id)
     if (req.files) {
       const { img, avatar } = req.files
       let fileName = uuid.v4() + '.jpg'
       if (img) {
+        fs.unlink(path.resolve(__dirname, '..', 'static/news', imgOld), function (err) {
+          if (err) throw err
+          console.log('file deleted')
+        })
         await img.mv(path.resolve(__dirname, '..', 'static/news', fileName))
         await news.update({ img: fileName })
       }
       if (avatar) {
+        fs.unlink(path.resolve(__dirname, '..', 'static/avatar', avatarOld), function (err) {
+          if (err) throw err
+          console.log('file deleted')
+        })
         await avatar.mv(path.resolve(__dirname, '..', 'static/avatar', fileName))
         await news.update({ avatar: fileName })
       }

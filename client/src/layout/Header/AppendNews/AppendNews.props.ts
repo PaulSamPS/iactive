@@ -6,4 +6,6 @@ export interface AppendNewsProps extends DetailedHTMLProps<HTMLAttributes<HTMLDi
   modal: boolean;
   update?: boolean;
   newsId?: number;
+  avatar?: string;
+  img?: string;
 }

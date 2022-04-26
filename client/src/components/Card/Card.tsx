@@ -86,7 +86,15 @@ export const Card = ({ news, ...props }: CardProps): JSX.Element => {
         <img src={`http://localhost:5000/news/${news.img}`} alt={news.author} />
         <span className={styles.postedAgo}>{postedAgo}</span>
       </div>
-      <AppendNews setModal={setModal} modal={modal} update={update} setUpdate={setUpdate} newsId={news.id} />
+      <AppendNews
+        setModal={setModal}
+        modal={modal}
+        update={update}
+        setUpdate={setUpdate}
+        newsId={news.id}
+        avatar={news.avatar}
+        img={news.img}
+      />
     </div>
   );
 };

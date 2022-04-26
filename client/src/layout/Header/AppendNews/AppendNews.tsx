@@ -12,7 +12,7 @@ import { createNews, getNews, updateNews } from '../../../redux/actions/newsActi
 import cn from 'classnames';
 import styles from './AppendNews.module.scss';
 
-export const AppendNews = ({ modal, setModal, update, newsId, setUpdate }: AppendNewsProps): JSX.Element => {
+export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUpdate }: AppendNewsProps): JSX.Element => {
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const [filesNews, setFilesNews] = React.useState<FileList | null>(null);
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendNewsAvatarInterface[]>([]);
@@ -33,11 +33,17 @@ export const AppendNews = ({ modal, setModal, update, newsId, setUpdate }: Appen
     formData.append('author', data.author);
     formData.append('body', data.body);
     if (filesAvatar) {
+      if (update) {
+        formData.append('avatarOld', avatar as unknown as Blob);
+      }
       formData.append('avatar', filesAvatar[0]);
     } else {
       formData.append('avatar', '');
     }
     if (filesNews) {
+      if (update) {
+        formData.append('imgOld', img as unknown as Blob);
+      }
       formData.append('img', filesNews[0]);
     } else {
       formData.append('img', '');
