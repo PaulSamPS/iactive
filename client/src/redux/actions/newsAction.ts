@@ -1,18 +1,26 @@
 import { AppDispatch } from '../store';
 import { newsReducer } from '../reducers/newsReducer';
-import { IResponseNews } from '../../interfaces/news.interface';
+import { INewsInterface } from '../../interfaces/news.interface';
 import { IErrorResponse } from '../../interfaces/error.interface';
 import { AxiosError, AxiosResponse } from 'axios';
 import { $api } from '../../http/axios';
 
-export const getNews = () => async (dispatch: AppDispatch) => {
+export const getNews = (sortBy?: string) => async (dispatch: AppDispatch) => {
   dispatch(newsReducer.actions.setNewsLoading());
   await $api
-    .get(`/api/news`)
-    .then((res: AxiosResponse<IResponseNews>) => {
-      dispatch(newsReducer.actions.setNewsSuccess(res.data.rows));
+    .get(`/api/news?sort=${sortBy}`)
+    .then((res: AxiosResponse<INewsInterface[]>) => {
+      dispatch(newsReducer.actions.setNewsSuccess(res.data));
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(newsReducer.actions.setNewsError(e.response?.data.message));
     });
+};
+
+export const createNews = (formdata: FormData) => async (dispatch: AppDispatch) => {
+  await $api.post(`/api/news/create`, formdata);
+};
+
+export const updateNews = (formdata: FormData, id: number | undefined) => async (dispatch: AppDispatch) => {
+  await $api.put(`/api/news/update/${id}`, formdata);
 };

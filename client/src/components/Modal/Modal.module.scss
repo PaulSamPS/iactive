@@ -1,0 +1,61 @@
+@import './scss/index';
+
+.overlay {
+	position: fixed;
+	z-index: 998;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	overflow: hidden;
+
+	@include flexCenterCenter;
+
+	opacity: 1;
+	background: rgba(33, 31, 32, 0.7);
+	backdrop-filter: blur(2px);
+
+	.modal {
+		position: relative;
+		z-index: 999;
+
+		@include flexColumn;
+
+		min-width: 458px;
+		min-height: 358px;
+
+		padding: 20px;
+
+		border-radius: 5px;
+		background: var(--white);
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+		h2 {
+			font-size: 25px;
+		}
+
+		svg {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+
+			cursor: pointer;
+			transition: all ease 0.2s;
+
+			&:hover {
+				transform: rotate(90deg);
+				fill: var(--blue);
+			}
+		}
+
+		@include _tablet {
+			min-width: 320px;
+		}
+
+		@include _mobileM {
+			width: 280px;
+			min-width: unset;
+		}
+	}
+}

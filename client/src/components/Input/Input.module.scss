@@ -1,0 +1,44 @@
+@import './scss/index';
+
+.wrapper {
+	position: relative;
+
+	width: 100%;
+
+	.input {
+		width: 100%;
+		padding: 15px 30px;
+
+		color: var(--black);
+		border: 1px solid var(--grey-light);
+		border-radius: 5px;
+		outline-color: var(--blue);
+		background: none;
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+		font-size: 16px;
+		font-weight: 400;
+
+		&::placeholder {
+			color: var(--grey);
+		}
+
+		@include _laptopL {
+			font-size: 14px;
+		}
+	}
+
+	.error {
+		border: 1px solid var(--red);
+	}
+
+	.errorMessage {
+		position: absolute;
+		top: -20px;
+		left: 0;
+
+		color: var(--red);
+
+		font-size: 14px;
+	}
+}

@@ -1,21 +1,40 @@
 import React from 'react';
-import styles from './Favourite.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getFavouriteNews } from '../../redux/actions/favouriteAction';
+import { Card } from '../../components/Card/Card';
+import { getNews } from '../../redux/actions/newsAction';
+import { Spinner } from '../../components/Spinner/Spinner';
+import { ReactComponent as ArrowIcon } from '../../helpers/icons/arrow.svg';
+import { useNavigate } from 'react-router-dom';
+import styles from './Favourite.module.scss';
 
-export const Favourite = () => {
+export const Favourite = (): JSX.Element => {
+  const { favouriteNews, isLoading } = useAppSelector((state) => state.favouriteReducer);
+  const { sortBy } = useAppSelector((state) => state.sortReducer);
   const dispatch = useAppDispatch();
-  const { favouriteNews } = useAppSelector((state) => state.favouriteReducer);
-
-  console.log(favouriteNews);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(getFavouriteNews());
+    dispatch(getNews(sortBy));
   }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (favouriteNews.length <= 0) {
+    return <h2 className={styles.notFound}>Вы пока ничего не добавили в избранное</h2>;
+  }
 
   return (
     <div className={styles.wrapper}>
-      <h1>Favourite</h1>
+      <div className={styles.back} onClick={() => navigate('/')}>
+        <ArrowIcon /> На главную
+      </div>
+      {favouriteNews.map((f) => (
+        <Card key={f.id} news={f} />
+      ))}
     </div>
   );
 };

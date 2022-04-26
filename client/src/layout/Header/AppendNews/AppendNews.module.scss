@@ -1,0 +1,131 @@
+.title {
+	margin: 0 0 40px;
+}
+
+.append {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(5, auto);
+	justify-items: left;
+	row-gap: 25px;
+
+	label {
+		display: grid;
+		align-items: center;
+		grid-template-columns: 130px 500px;
+
+		color: var(--grey);
+
+		label {
+			width: 100%;
+		}
+	}
+
+	.labelTextarea {
+		align-items: unset !important;
+
+		.body {
+			textarea {
+				min-height: 100px;
+				max-height: 200px;
+			}
+		}
+	}
+
+	.previewBlock {
+		width: 100%;
+
+		.previewAvatar {
+			img {
+				width: 36px;
+				height: 36px;
+
+				border-radius: 50%;
+				box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+				object-fit: cover;
+			}
+		}
+
+		.previewImage {
+			img {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+
+				border-radius: 5px;
+				box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+			}
+		}
+	}
+
+	.inputFile {
+		position: relative;
+
+		.file {
+			position: absolute;
+
+			visibility: hidden;
+
+			opacity: 0;
+		}
+
+		.inputBtn {
+			display: inline-block;
+
+			box-sizing: border-box;
+			width: 500px;
+			padding: 10px 30px;
+
+			cursor: pointer;
+			transition: all ease 0.2s;
+			text-align: center;
+
+			color: var(--white);
+
+			border: none;
+			border-radius: 5px;
+			background: var(--blue);
+
+			font-size: 14px;
+			font-weight: 700;
+
+			&:active {
+				transform: translateY(2px);
+
+				box-shadow: 0 5px 10px 0 #72A379B2;
+			}
+		}
+
+		.fileSuccess {
+			background: var(--green);
+		}
+	}
+
+	.addInfo {
+		button {
+			width: 227px;
+		}
+	}
+
+	.description {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+
+		.inputBlock {
+			label {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	.blockSubmit {
+		.submit {
+			margin-top: 20px;
+		}
+	}
+
+	.btn {
+		width: 100%;
+	}
+}

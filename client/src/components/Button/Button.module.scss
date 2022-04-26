@@ -16,6 +16,13 @@
 	line-height: 17px;
 
 	@include flexCenterCenter;
+
+	&:disabled {
+		pointer-events: none;
+
+		opacity: 0.5;
+		background: var(--grey);
+	}
 }
 
 .primary {

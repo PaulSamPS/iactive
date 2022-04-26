@@ -5,11 +5,11 @@ const maxAge = 60 * 60 * 1000 * 24 * 365 // один год
 const signed = true
 
 class FavouriteController {
-  async getOne(req, res) {
+  async get(req, res) {
     try {
       let favourite
       if (req.signedCookies.favouriteId) {
-        favourite = await favouriteService.getFavourite(parseInt(req.signedCookies.favouriteId))
+        favourite = await favouriteService.get(parseInt(req.signedCookies.favouriteId))
       } else {
         favourite = await Favourite.create()
       }
@@ -32,7 +32,7 @@ class FavouriteController {
       const { newsId } = req.params
       const favourite = await favouriteService.append(favouriteId, newsId, res)
       res.cookie('favouriteId', favourite.id, { maxAge, signed })
-      res.json(favourite)
+      return res.json(favourite)
     } catch (e) {
       next(res.send(e.message))
     }

@@ -13,6 +13,9 @@ const pretty = (favourite) => {
         body: item.body,
         avatar: item.avatar,
         img: item.img,
+        isFavourite: item.isFavourite,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
       }
     })
   }
@@ -20,10 +23,10 @@ const pretty = (favourite) => {
 }
 
 class FavouriteService {
-  async getFavourite(favouriteId) {
+  async get(favouriteId) {
     let favourite = await Favourite.findByPk(favouriteId, {
       attributes: ['id'],
-      include: [{ model: News, attributes: ['id', 'title', 'author', 'body', 'avatar', 'img'] }],
+      include: [{ model: News, attributes: ['id', 'title', 'author', 'body', 'avatar', 'img', 'isFavourite', 'createdAt', 'updatedAt'] }],
     })
     if (!favourite) {
       favourite = await Favourite.create()
@@ -34,14 +37,13 @@ class FavouriteService {
   async append(favouriteId, newsId, res) {
     let favourite = await Favourite.findByPk(favouriteId, {
       attributes: ['id'],
-      include: [{ model: News, attributes: ['id', 'title', 'author', 'body', 'avatar', 'img'] }],
+      include: [{ model: News, attributes: ['id', 'title', 'author', 'body', 'avatar', 'img', 'isFavourite', 'createdAt', 'updatedAt'] }],
     })
     if (!favourite) {
       favourite = await Favourite.create()
     }
     await FavouriteNews.create({ favouriteId, newsId })
     const news = await News.findByPk(newsId)
-    console.log(news)
     news.isFavourite = true
     await news.save()
     await favourite.reload()
@@ -59,6 +61,9 @@ class FavouriteService {
       where: { favouriteId, newsId },
     })
     if (favouriteNews) {
+      const news = await News.findByPk(newsId)
+      news.isFavourite = false
+      await news.save()
       await favouriteNews.destroy()
       await favourite.reload()
     }
