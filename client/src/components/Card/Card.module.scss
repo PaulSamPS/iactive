@@ -1,4 +1,4 @@
-@import './scss/index';
+@import '../../scss/index';
 
 .wrapper {
 	position: relative;
@@ -29,16 +29,20 @@
 	}
 
 	.titleBlock {
-		grid-area: title;
+		display: grid;
+		align-items: center;
+
 		color: var(--grey);
 
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 13px;
-		display: grid;
-		align-items: center;
-		.author {
+		grid-area: title;
 
+		.title {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 
@@ -67,8 +71,10 @@
 
 			.settings {
 				bottom: -85px !important;
-				background: var(--grey);
+
 				width: 100px !important;
+
+				background: var(--grey);
 			}
 
 			.dropdownContent {
@@ -88,8 +94,9 @@
 				span {
 					display: block;
 
-					padding: 12px 16px;
 					min-width: 200px;
+
+					padding: 12px 16px;
 
 					cursor: pointer;
 					transition: all ease 0.2s;
@@ -132,8 +139,6 @@
 	}
 
 	.body {
-		flex-grow: 1;
-
 		margin: 0;
 		grid-area: body;
 	}
@@ -146,6 +151,7 @@
 		.next {
 			cursor: pointer;
 			transition: all ease 0.2s;
+			width: 45px;
 
 			color: var(--grey);
 
@@ -160,13 +166,13 @@
 
 			margin: 10px 0;
 
-			cursor: pointer;
-
 			border-radius: 5px;
+			object-fit: cover;
 		}
 
 		.postedAgo {
 			color: var(--grey);
+
 			font-size: 12px;
 		}
 	}
@@ -175,9 +181,10 @@
 		position: absolute;
 		right: 20px;
 		bottom: 20px;
-		font-size: 12px;
 
 		color: var(--grey);
+
+		font-size: 12px;
 		grid-area: date;
 	}
 }

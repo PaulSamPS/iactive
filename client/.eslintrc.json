@@ -1,4 +1,5 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true,
@@ -30,6 +31,7 @@
         "object-curly-spacing": "off",
         "react/react-in-jsx-scope": "off",
         "indent": "off",
-        "space-before-function-paren": "off"
+        "space-before-function-paren": "off",
+        "react/display-name": "off"
     }
 }

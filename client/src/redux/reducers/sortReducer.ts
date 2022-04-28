@@ -5,7 +5,7 @@ interface ISort {
 }
 
 const initialState: ISort = {
-  sortBy: 'up',
+  sortBy: 'down',
 };
 
 export const sortReducer = createSlice({

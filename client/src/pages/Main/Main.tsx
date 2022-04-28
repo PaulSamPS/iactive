@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getNews } from '../../redux/actions/newsAction';
 import { Card } from '../../components/Card/Card';
 import styles from './Main.module.scss';
-import { Sort } from '../../layout/Sort/Sort';
+import { Sort } from '../../components/Sort/Sort';
 
 export const Main = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -15,21 +15,25 @@ export const Main = (): JSX.Element => {
   }, [sortBy]);
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
-      dispatch(getNews(sortBy));
+    const timer = setInterval(async () => {
+      await dispatch(getNews(sortBy));
     }, 5000);
     return () => clearInterval(timer);
   }, [sortBy]);
 
+  if (!document.cookie) {
+    return <h1>Перезагрузите страницу</h1>;
+  }
+
   if (news.length <= 0) {
-    return <h2 className={styles.notFound}>Не добалено ни одной новости...</h2>;
+    return <h2 className={styles.notFound}>Нет новостей...</h2>;
   }
 
   return (
     <>
       <Sort />
       {news.map((n) => (
-        <Card key={n.id} news={n} />
+        <Card layout key={n.id} news={n} />
       ))}
     </>
   );

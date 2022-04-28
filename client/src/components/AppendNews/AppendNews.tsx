@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from 'react';
-import { Input } from '../../../components/Input/Input';
-import { Button } from '../../../components/Button/Button';
-import { Modal } from '../../../components/Modal/Modal';
+import { Input } from '../Input/Input';
+import { Button } from '../Button/Button';
+import { Modal } from '../Modal/Modal';
 import { useForm } from 'react-hook-form';
-import { IFormdataInterface } from '../../../interfaces/formdata.interface';
+import { IFormdataInterface } from '../../interfaces/formdata.interface';
 import { AppendNewsProps } from './AppendNews.props';
-import { Textarea } from '../../../components/Textarea/Textarea';
-import { IAppendNewsAvatarInterface, IAppendNewsInterface } from '../../../interfaces/AppendNews.interface';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { createNews, getNews, updateNews } from '../../../redux/actions/newsAction';
+import { Textarea } from '../Textarea/Textarea';
+import { IAppendNewsAvatarInterface, IAppendNewsInterface } from '../../interfaces/AppendNews.interface';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { createNews, getNews, updateNews } from '../../redux/actions/newsAction';
 import cn from 'classnames';
 import styles from './AppendNews.module.scss';
 

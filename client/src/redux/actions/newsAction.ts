@@ -3,7 +3,9 @@ import { newsReducer } from '../reducers/newsReducer';
 import { INewsInterface } from '../../interfaces/news.interface';
 import { IErrorResponse } from '../../interfaces/error.interface';
 import { AxiosError, AxiosResponse } from 'axios';
+import { oneNewsReducer } from '../reducers/oneNewsReducer';
 import { $api } from '../../http/axios';
+import { getFavouriteNews } from './favouriteAction';
 
 export const getNews = (sortBy?: string) => async (dispatch: AppDispatch) => {
   dispatch(newsReducer.actions.setNewsLoading());
@@ -11,9 +13,22 @@ export const getNews = (sortBy?: string) => async (dispatch: AppDispatch) => {
     .get(`/api/news?sort=${sortBy}`)
     .then((res: AxiosResponse<INewsInterface[]>) => {
       dispatch(newsReducer.actions.setNewsSuccess(res.data));
+      dispatch(getFavouriteNews());
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(newsReducer.actions.setNewsError(e.response?.data.message));
+    });
+};
+
+export const getOneNews = (id: string | undefined) => async (dispatch: AppDispatch) => {
+  dispatch(oneNewsReducer.actions.setOneNewsLoading());
+  await $api
+    .get(`/api/news/${id}`)
+    .then((res: AxiosResponse<INewsInterface>) => {
+      dispatch(oneNewsReducer.actions.setOneNewsSuccess(res.data));
+    })
+    .catch((e: AxiosError<IErrorResponse>) => {
+      dispatch(oneNewsReducer.actions.setOneNewsError(e.response?.data.message));
     });
 };
 

@@ -1,7 +1,7 @@
 const favouriteService = require('../services/favouriteService')
 const { Favourite } = require('../models/models')
 
-const maxAge = 60 * 60 * 1000 * 24 * 365 // один год
+const maxAge = 60 * 60 * 1000 * 24 * 365
 const signed = true
 
 class FavouriteController {
@@ -57,3 +57,4 @@ class FavouriteController {
 }
 
 module.exports = new FavouriteController()
+

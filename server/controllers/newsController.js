@@ -1,4 +1,4 @@
-const { News } = require('../models/models')
+const { News, Favourite } = require('../models/models')
 const path = require('path')
 const uuid = require('uuid')
 const fs = require('fs')

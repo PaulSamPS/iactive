@@ -10,8 +10,8 @@ export const getFavouriteNews = () => async (dispatch: AppDispatch) => {
   dispatch(favouriteReducer.actions.setFavouriteNewsLoading());
   await $api
     .get(`/api/favourite`)
-    .then((res: AxiosResponse<IResponseFavouriteNews>) => {
-      dispatch(favouriteReducer.actions.setFavouriteNewsSuccess(res.data.news));
+    .then(async (res: AxiosResponse<IResponseFavouriteNews>) => {
+      await dispatch(favouriteReducer.actions.setFavouriteNewsSuccess(res.data.news));
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(favouriteReducer.actions.setFavouriteNewsError(e.response?.data.message));
