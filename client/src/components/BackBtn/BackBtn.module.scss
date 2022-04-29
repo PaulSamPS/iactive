@@ -1,40 +1,40 @@
 .back {
-  position: relative;
+	position: relative;
 
-  display: inline-block;
+	display: inline-block;
 
-  margin-left: 25px;
-  padding: 20px 0;
+	margin-left: 25px;
+	padding: 20px 0;
 
-  cursor: pointer;
-  transition: all ease 0.2s;
+	cursor: pointer;
+	transition: all ease 0.2s;
 
-  color: var(--grey);
+	color: var(--grey);
 
-  font-size: 20px;
-  font-weight: 500;
+	font-size: 20px;
+	font-weight: 500;
 
-  &:hover {
-    color: var(--blue);
+	&:hover {
+		color: var(--blue);
 
-    svg {
-      fill: var(--blue);
-    }
-  }
+		svg {
+			fill: var(--blue);
+		}
+	}
 
-  &:active {
-    transform: translateY(2px);
-  }
+	&:active {
+		transform: translateY(2px);
+	}
 
-  svg {
-    position: absolute;
-    top: 23px;
-    left: -25px;
+	svg {
+		position: absolute;
+		top: 23px;
+		left: -25px;
 
-    width: 20px;
-    height: 20px;
+		width: 20px;
+		height: 20px;
 
-    transition: all ease 0.2s;
-    fill: var(--grey);
-  }
+		transition: all ease 0.2s;
+		fill: var(--grey);
+	}
 }

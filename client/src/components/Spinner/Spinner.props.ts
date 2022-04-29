@@ -1,5 +1,3 @@
-import {DetailedHTMLProps, HTMLAttributes} from 'react';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-export interface SpinnerProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>{
-    mHeight: string
-}
+export interface SpinnerProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}

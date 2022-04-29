@@ -41,21 +41,27 @@ class NewsController {
       limit = limit || 20
       let offset = page * limit - limit
       const news = await News.findAndCountAll({ limit, offset })
+      const { count } = news
       if (sort === 'up') {
-        return res.json([
-          ...news.rows.sort(function (a, b) {
-            return a.createdAt - b.createdAt
-          }),
-        ])
+        return res.json({
+          count: count,
+          rows: [
+            ...news.rows.sort(function (a, b) {
+              return a.createdAt - b.createdAt || a.id - b.id
+            }),
+          ],
+        })
       } else if (sort === 'down') {
-        return res.json([
-          ...news.rows.sort(function (a, b) {
-            return b.createdAt - a.createdAt
-          }),
-        ])
-      } else {
-        return res.json(news)
+        return res.json({
+          count: count,
+          rows: [
+            ...news.rows.sort(function (a, b) {
+              return b.id - a.id
+            }),
+          ],
+        })
       }
+      return res.json(news)
     } catch (e) {
       next(res.json(e.message))
     }

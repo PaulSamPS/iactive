@@ -1,0 +1,36 @@
+@import './src/scss/index';
+
+.wrapper {
+	position: relative;
+
+	align-items: unset;
+
+	min-height: 100vh;
+	padding: 30px 20px 20px;
+	row-gap: 10px;
+
+	@include flexColumn;
+
+	.favourite {
+		@include flex;
+		cursor: pointer;
+		transition: all ease 0.2s;
+
+		color: var(--grey-light);
+
+		font-weight: 500;
+		column-gap: 5px;
+
+		svg {
+			transition: all ease 0.2s;
+		}
+
+		&:hover {
+			color: var(--blue);
+
+			svg {
+				fill: var(--blue);
+			}
+		}
+	}
+}

@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .title {
 	margin: 0 0 40px;
 }
@@ -15,6 +17,10 @@
 		grid-template-columns: 130px 500px;
 
 		color: var(--grey);
+
+		@include _tablet {
+			grid-template-columns: 1fr;
+		}
 
 		label {
 			width: 100%;
@@ -93,6 +99,10 @@
 				transform: translateY(2px);
 
 				box-shadow: 0 5px 10px 0 #72A379B2;
+			}
+
+			@include _tablet {
+				width: 100%;
 			}
 		}
 

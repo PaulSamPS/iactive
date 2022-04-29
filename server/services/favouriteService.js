@@ -8,7 +8,7 @@ const pretty = (favourite) => {
     data.news = favourite.news.map((item) => {
       return {
         id: item.id,
-        title: item.name,
+        title: item.title,
         author: item.author,
         body: item.body,
         avatar: item.avatar,
@@ -28,6 +28,9 @@ class FavouriteService {
       attributes: ['id'],
       include: [{ model: News, attributes: ['id', 'title', 'author', 'body', 'avatar', 'img', 'isFavourite', 'createdAt', 'updatedAt'] }],
     })
+    if (!favourite) {
+      favourite = await Favourite.create()
+    }
     return pretty(favourite)
   }
 

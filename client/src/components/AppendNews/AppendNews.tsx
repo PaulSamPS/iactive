@@ -17,7 +17,7 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
   const [filesNews, setFilesNews] = React.useState<FileList | null>(null);
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendNewsAvatarInterface[]>([]);
   const [previewNews, setPreviewNews] = React.useState<IAppendNewsInterface[]>([]);
-  const { sortBy } = useAppSelector((state) => state.sortReducer);
+  const { sortBy } = useAppSelector((state) => state.newsReducer);
   const dispatch = useAppDispatch();
 
   const {

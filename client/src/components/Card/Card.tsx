@@ -11,6 +11,7 @@ import { AppendNews } from '../AppendNews/AppendNews';
 import { deleteNews } from '../../redux/actions/newsAction';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from '../Spinner/Spinner';
 import { API_URL } from '../../App';
 import 'moment/locale/ru';
 import cn from 'classnames';
@@ -19,10 +20,11 @@ import styles from './Card.module.scss';
 
 export const Card = motion(
   forwardRef(({ news, ...props }: CardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
-    const { sortBy } = useAppSelector((state) => state.sortReducer);
+    const { sortBy } = useAppSelector((state) => state.newsReducer);
     const { favouriteNews } = useAppSelector((state) => state.favouriteReducer);
     const [modal, setModal] = React.useState<boolean>(false);
     const [update, setUpdate] = React.useState<boolean>(false);
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     moment.locale('ru');
@@ -30,14 +32,16 @@ export const Card = motion(
     const time = moment(news.createdAt).format('HH:mm');
     const date = moment(news.createdAt).format('D.MM.y');
     const postedAgo = moment(news.createdAt).fromNow();
-    const fav = favouriteNews.map((f) => f.id);
+    const fav = favouriteNews && favouriteNews.map((f) => f.id).includes(news.id);
 
-    const addToFavourite = async (newsId: number) => {
-      await dispatch(addToFavouriteNews(newsId, sortBy));
+    const addToFavourite = (newsId: number) => {
+      setIsLoading(true);
+      dispatch(addToFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
     };
 
-    const removeFromFavourite = async (newsId: number) => {
-      await dispatch(removeFromFavouriteNews(newsId, sortBy));
+    const removeFromFavourite = (newsId: number) => {
+      setIsLoading(true);
+      dispatch(removeFromFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
     };
 
     const handleUpdate = () => {
@@ -45,8 +49,8 @@ export const Card = motion(
       setUpdate(true);
     };
 
-    const handleDelete = async (newsId: number, avatar: string, img: string) => {
-      await dispatch(deleteNews(newsId, avatar, img, sortBy));
+    const handleDelete = (newsId: number, avatar: string, img: string) => {
+      dispatch(deleteNews(newsId, avatar, img, sortBy));
     };
 
     return (
@@ -73,13 +77,17 @@ export const Card = motion(
           </div>
           <RectangleIcon />
           <div className={styles.favouriteBlock}>
-            <StarIcon
-              className={cn(styles.favourite, {
-                [styles.append]: fav.includes(news.id),
-              })}
-              onClick={() => addToFavourite(news.id)}
-            />
-            {fav.includes(news.id) && (
+            {!isLoading ? (
+              <StarIcon
+                className={cn(styles.favourite, {
+                  [styles.append]: fav,
+                })}
+                onClick={() => addToFavourite(news.id)}
+              />
+            ) : (
+              <Spinner className={styles.spinner} />
+            )}
+            {fav && (
               <div className={styles.dropdownContent}>
                 <span onClick={() => removeFromFavourite(news.id)}>Удалить из избраного</span>
               </div>

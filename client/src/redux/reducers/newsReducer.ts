@@ -5,12 +5,16 @@ interface INews {
   news: INewsInterface[];
   isLoading: boolean;
   error: string | undefined;
+  sortBy: string;
+  count: number;
 }
 
 const initialState: INews = {
   news: [],
   isLoading: false,
   error: '',
+  sortBy: 'down',
+  count: 0,
 };
 
 export const newsReducer = createSlice({
@@ -29,7 +33,15 @@ export const newsReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    setSort(state, action: PayloadAction<string>) {
+      state.sortBy = action.payload;
+    },
+    setCount(state, action: PayloadAction<number>) {
+      state.count = action.payload;
+    },
   },
 });
+
+export const { setSort } = newsReducer.actions;
 
 export default newsReducer.reducer;

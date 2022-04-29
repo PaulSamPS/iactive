@@ -10,8 +10,8 @@ export const getFavouriteNews = () => async (dispatch: AppDispatch) => {
   dispatch(favouriteReducer.actions.setFavouriteNewsLoading());
   await $api
     .get(`/api/favourite`)
-    .then(async (res: AxiosResponse<IResponseFavouriteNews>) => {
-      await dispatch(favouriteReducer.actions.setFavouriteNewsSuccess(res.data.news));
+    .then((res: AxiosResponse<IResponseFavouriteNews>) => {
+      dispatch(favouriteReducer.actions.setFavouriteNewsSuccess(res.data.news));
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(favouriteReducer.actions.setFavouriteNewsError(e.response?.data.message));
@@ -20,8 +20,8 @@ export const getFavouriteNews = () => async (dispatch: AppDispatch) => {
 
 export const addToFavouriteNews = (newsId: number, sortBy: string) => async (dispatch: AppDispatch) => {
   await $api.post(`/api/favourite/append/${newsId}`);
-  await dispatch(getNews(sortBy));
-  await dispatch(getFavouriteNews());
+  dispatch(getNews(sortBy));
+  dispatch(getFavouriteNews());
 };
 
 export const removeFromFavouriteNews = (newsId: number, sortBy: string) => async (dispatch: AppDispatch) => {

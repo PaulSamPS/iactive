@@ -1,13 +1,13 @@
 import React from 'react';
-import { setSort } from '../../redux/reducers/sortReducer';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as ArrowIcon } from '../../helpers/icons/arrow.svg';
+import { setSort } from '../../redux/reducers/newsReducer';
 import cn from 'classnames';
 import styles from './Sort.module.scss';
 
 export const Sort = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { sortBy } = useAppSelector((state) => state.sortReducer);
+  const { sortBy } = useAppSelector((state) => state.newsReducer);
 
   return (
     <div className={styles.wrapper}>

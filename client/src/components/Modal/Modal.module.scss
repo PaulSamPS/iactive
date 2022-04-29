@@ -22,7 +22,7 @@
 
 		@include flexColumn;
 
-		min-width: 458px;
+		width: 458px;
 		min-height: 358px;
 
 		padding: 20px;
@@ -30,6 +30,10 @@
 		border-radius: 5px;
 		background: var(--white);
 		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+		@include _tablet {
+			width: 425px;
+		}
 
 		h2 {
 			font-size: 25px;

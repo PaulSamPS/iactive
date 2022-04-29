@@ -20,6 +20,22 @@
 		'time body body body'
 		'. image image image';
 
+	@include _laptop {
+		width: 656px;
+		grid-template-rows: 36px auto auto;
+	}
+
+	@include _tablet {
+		width: 385px;
+		grid-template-columns: 36px 1fr auto;
+		grid-template-rows: 36px auto auto auto auto;
+		grid-template-areas:
+			'buttons buttons icons'
+			'avatar title title'
+			'time body body'
+			'image image image';
+	}
+
 	.avatar {
 		width: 36px;
 		height: 36px;
@@ -40,8 +56,9 @@
 		grid-area: title;
 
 		.title {
-			white-space: nowrap;
 			overflow: hidden;
+
+			white-space: nowrap;
 			text-overflow: ellipsis;
 		}
 	}
@@ -66,6 +83,21 @@
 			&:hover {
 				.dropdownContent {
 					display: block;
+				}
+			}
+
+			.spinner {
+				width: 20px;
+				height: 20px;
+				min-height: unset !important;
+
+				&::after {
+					width: 10px !important;
+					height: 10px !important;
+					margin: 0;
+
+					border: 3px solid var(--grey);
+					border-color: var(--grey) transparent var(--grey) transparent;
 				}
 			}
 
@@ -141,6 +173,13 @@
 	.body {
 		margin: 0;
 		grid-area: body;
+
+		@include _laptop {
+			overflow: hidden;
+
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
 	}
 
 	.image {
@@ -149,9 +188,10 @@
 		grid-area: image;
 
 		.next {
+			width: 45px;
+
 			cursor: pointer;
 			transition: all ease 0.2s;
-			width: 45px;
 
 			color: var(--grey);
 

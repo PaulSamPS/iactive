@@ -1,14 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import newsReducer from './reducers/newsReducer';
 import favouriteReducer from './reducers/favouriteReducer';
-import sortReducer from './reducers/sortReducer';
 import oneNewsReducer from './reducers/oneNewsReducer';
+import appendFavouriteReducer from './reducers/appendFavouriteReducer';
 
 const rootReducer = combineReducers({
   newsReducer,
   favouriteReducer,
-  sortReducer,
   oneNewsReducer,
+  appendFavouriteReducer,
 });
 
 export const createStore = () => {

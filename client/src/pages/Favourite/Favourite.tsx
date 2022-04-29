@@ -8,6 +8,7 @@ import styles from './Favourite.module.scss';
 
 export const Favourite = (): JSX.Element => {
   const { favouriteNews, isLoading } = useAppSelector((state) => state.favouriteReducer);
+
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {

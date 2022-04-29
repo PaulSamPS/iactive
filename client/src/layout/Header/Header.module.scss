@@ -1,25 +1,38 @@
 @import 'src/scss/index';
 
 .wrapper {
+	padding: 20px;
+
 	background: var(--white);
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+	.logo {
+		margin: 0;
+
+		cursor: pointer;
+		transition: all ease 0.2s;
+
+		&:hover {
+			color: var(--blue);
+		}
+	}
+
+	.logoMobile {
+		text-align: center;
+	}
 
 	.container {
 		max-width: 990px;
 		margin: 0 auto;
-		padding: 20px;
 
 		@include flexBetweenCenter;
 
-		.logo {
-			margin: 0;
+		@include _laptop {
+			width: 768px;
+		}
 
-			cursor: pointer;
-			transition: all ease 0.2s;
-
-			&:hover {
-				color: var(--blue);
-			}
+		@include _tablet {
+			display: none;
 		}
 
 		.right {
@@ -49,5 +62,48 @@
 				}
 			}
 		}
+	}
+
+	.mobile {
+		@include flexCenterCenter;
+		position: relative;
+
+		.burger {
+			position: absolute;
+			top: 10px;
+			left: 0;
+
+			cursor: pointer;
+		}
+	}
+
+	.overlay {
+		position: fixed;
+		z-index: 99;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		overflow: hidden;
+
+		opacity: 1;
+		background: rgba(33, 31, 32, 0.7);
+		backdrop-filter: blur(2px);
+
+		@include flex;
+	}
+
+	.menu {
+		position: fixed;
+		z-index: 999;
+		top: 0;
+		bottom: 0;
+		left: 0;
+
+		width: 320px;
+		height: 100vh;
+
+		background: var(--white);
 	}
 }

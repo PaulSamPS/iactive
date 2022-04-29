@@ -1,19 +1,19 @@
 import { AppDispatch } from '../store';
 import { newsReducer } from '../reducers/newsReducer';
-import { INewsInterface } from '../../interfaces/news.interface';
+import { INewsInterface, IResponseNews } from '../../interfaces/news.interface';
 import { IErrorResponse } from '../../interfaces/error.interface';
 import { AxiosError, AxiosResponse } from 'axios';
 import { oneNewsReducer } from '../reducers/oneNewsReducer';
 import { $api } from '../../http/axios';
-import { getFavouriteNews } from './favouriteAction';
 
 export const getNews = (sortBy?: string) => async (dispatch: AppDispatch) => {
   dispatch(newsReducer.actions.setNewsLoading());
+
   await $api
-    .get(`/api/news?sort=${sortBy}`)
-    .then((res: AxiosResponse<INewsInterface[]>) => {
-      dispatch(newsReducer.actions.setNewsSuccess(res.data));
-      dispatch(getFavouriteNews());
+    .get(`/api/news?limit=20&sort=${sortBy}`)
+    .then((res: AxiosResponse<IResponseNews>) => {
+      dispatch(newsReducer.actions.setNewsSuccess(res.data.rows));
+      dispatch(newsReducer.actions.setCount(res.data.count));
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(newsReducer.actions.setNewsError(e.response?.data.message));
