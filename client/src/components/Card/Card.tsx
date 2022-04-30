@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react';
+import React from 'react';
 import { CardProps } from './Card.props';
 import { Button } from '../Button/Button';
 import { ReactComponent as ArrowIcon } from '../../helpers/icons/arrowRight.svg';
@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addToFavouriteNews, removeFromFavouriteNews } from '../../redux/actions/favouriteAction';
 import { AppendNews } from '../AppendNews/AppendNews';
 import { deleteNews } from '../../redux/actions/newsAction';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Spinner/Spinner';
 import { API_URL } from '../../App';
@@ -18,43 +18,50 @@ import cn from 'classnames';
 import moment from 'moment';
 import styles from './Card.module.scss';
 
-export const Card = motion(
-  forwardRef(({ news, ...props }: CardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
-    const { sortBy } = useAppSelector((state) => state.newsReducer);
-    const { favouriteNews } = useAppSelector((state) => state.favouriteReducer);
-    const [modal, setModal] = React.useState<boolean>(false);
-    const [update, setUpdate] = React.useState<boolean>(false);
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    moment.locale('ru');
+export const Card = ({ news }: CardProps): JSX.Element => {
+  const { sortBy } = useAppSelector((state) => state.newsReducer);
+  const { favouriteNews } = useAppSelector((state) => state.favouriteReducer);
+  const [modal, setModal] = React.useState<boolean>(false);
+  const [update, setUpdate] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  moment.locale('ru');
 
-    const time = moment(news.createdAt).format('HH:mm');
-    const date = moment(news.createdAt).format('D.MM.y');
-    const postedAgo = moment(news.createdAt).fromNow();
-    const fav = favouriteNews && favouriteNews.map((f) => f.id).includes(news.id);
+  const time = moment(news.createdAt).format('HH:mm');
+  const date = moment(news.createdAt).format('D.MM.y');
+  const postedAgo = moment(news.createdAt).fromNow();
+  const fav = favouriteNews && favouriteNews.map((f) => f.id).includes(news.id);
 
-    const addToFavourite = (newsId: number) => {
-      setIsLoading(true);
-      dispatch(addToFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
-    };
+  const addToFavourite = (newsId: number) => {
+    setIsLoading(true);
+    dispatch(addToFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
+  };
 
-    const removeFromFavourite = (newsId: number) => {
-      setIsLoading(true);
-      dispatch(removeFromFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
-    };
+  const removeFromFavourite = (newsId: number) => {
+    setIsLoading(true);
+    dispatch(removeFromFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
+  };
 
-    const handleUpdate = () => {
-      setModal(true);
-      setUpdate(true);
-    };
+  const handleUpdate = () => {
+    setModal(true);
+    setUpdate(true);
+  };
 
-    const handleDelete = (newsId: number, avatar: string, img: string) => {
-      dispatch(deleteNews(newsId, avatar, img, sortBy));
-    };
+  const handleDelete = (newsId: number, avatar: string, img: string) => {
+    dispatch(deleteNews(newsId, avatar, img, sortBy));
+  };
 
-    return (
-      <div className={styles.wrapper} {...props} ref={ref}>
+  return (
+    <AnimatePresence>
+      <motion.div
+        className={styles.wrapper}
+        initial={{ opacity: 0, translateY: '100%' }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          type: 'tween',
+        }}
+      >
         <span className={styles.date}>{date}</span>
         <img className={styles.avatar} src={`${API_URL}/avatar/${news.avatar}`} alt={news.author} />
         <div className={styles.titleBlock}>
@@ -82,7 +89,7 @@ export const Card = motion(
                 className={cn(styles.favourite, {
                   [styles.append]: fav,
                 })}
-                onClick={() => addToFavourite(news.id)}
+                onClick={!fav ? () => addToFavourite(news.id) : ''}
               />
             ) : (
               <Spinner className={styles.spinner} />
@@ -103,16 +110,16 @@ export const Card = motion(
           <img src={`${API_URL}/news/${news.img}`} alt={news.author} />
           <span className={styles.postedAgo}>{postedAgo}</span>
         </div>
-        <AppendNews
-          setModal={setModal}
-          modal={modal}
-          update={update}
-          setUpdate={setUpdate}
-          newsId={news.id}
-          avatar={news.avatar}
-          img={news.img}
-        />
-      </div>
-    );
-  })
-);
+      </motion.div>
+      <AppendNews
+        setModal={setModal}
+        modal={modal}
+        update={update}
+        setUpdate={setUpdate}
+        newsId={news.id}
+        avatar={news.avatar}
+        img={news.img}
+      />
+    </AnimatePresence>
+  );
+};

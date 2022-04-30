@@ -1,0 +1,16 @@
+@import 'src/scss/index';
+
+.wrapper {
+  @include flexCenterCenter;
+  margin-bottom: 40px;
+  column-gap: 10px;
+  .paginateBtn {
+    color: var(--blue);
+    border: 1px solid var(--blue);
+  }
+
+  .active {
+    background: var(--blue);
+    color: var(--white);
+  }
+}

@@ -4,19 +4,12 @@ import { getNews } from '../../redux/actions/newsAction';
 import { Card } from '../../components/Card/Card';
 import { Sort } from '../../components/Sort/Sort';
 import { getFavouriteNews } from '../../redux/actions/favouriteAction';
+import { Pagination } from '../../components/Pagination/Pagination';
 import styles from './Main.module.scss';
-import { createPages } from '../../helpers/pageCreator';
-import { Button } from '../../components/Button/Button';
-import { setCurrentPage } from '../../redux/reducers/newsReducer';
-import cn from 'classnames';
 
 export const Main = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { news, sortBy, totalCount, perPage, currentPage } = useAppSelector((state) => state.newsReducer);
-  const totalPage = Math.ceil(totalCount / perPage);
-  const pages: number[] = [];
-
-  createPages(pages, totalPage, currentPage);
+  const { news, sortBy, currentPage } = useAppSelector((state) => state.newsReducer);
 
   React.useEffect(() => {
     dispatch(getNews(sortBy));
@@ -38,22 +31,9 @@ export const Main = (): JSX.Element => {
     <>
       <Sort />
       {news.map((n) => (
-        <Card layout key={n.id} news={n} />
+        <Card key={n.id} news={n} />
       ))}
-      <div className={styles.pagination}>
-        {pages.map((p: number) => (
-          <Button
-            key={p}
-            appearance='transparent'
-            onClick={() => dispatch(setCurrentPage(p))}
-            className={cn(styles.paginateBtn, {
-              [styles.active]: currentPage == p,
-            })}
-          >
-            {p}
-          </Button>
-        ))}
-      </div>
+      <Pagination />
     </>
   );
 };

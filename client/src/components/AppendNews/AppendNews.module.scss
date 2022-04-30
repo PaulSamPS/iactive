@@ -3,7 +3,7 @@
 .title {
 	margin: 0 0 40px;
 
-	@include _mobileM {
+	@include _mobileL {
 		margin-top: 20px;
 	}
 }

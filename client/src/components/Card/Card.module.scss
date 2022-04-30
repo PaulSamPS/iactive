@@ -34,7 +34,7 @@
 			'image image image';
 	}
 
-	@include _mobileM {
+	@include _mobileL {
 		width: 335px;
 		grid-template-columns: 36px 1fr;
 		grid-template-rows: 36px repeat(5, auto);
@@ -85,7 +85,7 @@
 		column-gap: 10px;
 		grid-area: icons;
 
-		@include _mobileM {
+		@include _mobileL {
 			justify-self: right;
 		}
 

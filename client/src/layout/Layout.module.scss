@@ -12,9 +12,10 @@
 
 		@include _tablet {
 			width: 425px;
+			padding: 0 10px;
 		}
 
-		@include _mobileM {
+		@include _mobileL {
 			width: 375px;
 		}
 	}
