@@ -185,12 +185,13 @@
 	}
 
 	.body {
-		margin: 0;
-		grid-area: body;
 		overflow: hidden;
+
+		margin: 0;
 
 		white-space: nowrap;
 		text-overflow: ellipsis;
+		grid-area: body;
 	}
 
 	.image {

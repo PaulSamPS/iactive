@@ -1,22 +1,22 @@
 @import 'src/scss/index';
 
 .wrapper {
-  @include flexCenterCenter;
-  margin-bottom: 40px;
-  column-gap: 10px;
+	@include flexCenterCenter;
+	margin-bottom: 40px;
+	column-gap: 10px;
 
-  .paginateBtn {
-    color: var(--blue);
-    border: 1px solid var(--blue);
+	.paginateBtn {
+		color: var(--blue);
+		border: 1px solid var(--blue);
 
-    &:hover {
-      background: var(--blue);
-      color: var(--white);
-    }
-  }
+		&:hover {
+			color: var(--white);
+			background: var(--blue);
+		}
+	}
 
-  .active {
-    background: var(--blue);
-    color: var(--white);
-  }
+	.active {
+		color: var(--white);
+		background: var(--blue);
+	}
 }
