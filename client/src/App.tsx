@@ -5,8 +5,6 @@ import { Favourite } from './pages/Favourite/Favourite';
 import { Main } from './pages/Main/Main';
 import { News } from './pages/News/News';
 
-export const API_URL = 'http://194.87.98.26:5000';
-
 export const App = () => {
   return (
     <BrowserRouter>

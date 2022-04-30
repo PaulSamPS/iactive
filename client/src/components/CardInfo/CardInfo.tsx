@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardInfoProps } from './CardInfo.props';
-import { API_URL } from '../../App';
 import { BackBtn } from '../BackBtn/BackBtn';
+import { API_URL } from '../../http/axios';
 import moment from 'moment';
 import styles from './CardInfo.module.scss';
 

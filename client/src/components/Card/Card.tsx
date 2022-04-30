@@ -9,10 +9,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addToFavouriteNews, removeFromFavouriteNews } from '../../redux/actions/favouriteAction';
 import { AppendNews } from '../AppendNews/AppendNews';
 import { deleteNews } from '../../redux/actions/newsAction';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Spinner/Spinner';
-import { API_URL } from '../../App';
+import { API_URL } from '../../http/axios';
 import 'moment/locale/ru';
 import cn from 'classnames';
 import moment from 'moment';
@@ -53,7 +53,7 @@ export const Card = ({ news }: CardProps): JSX.Element => {
   };
 
   return (
-    <AnimatePresence>
+    <>
       <motion.div
         className={styles.wrapper}
         initial={{ opacity: 0, translateY: '100%' }}
@@ -89,7 +89,7 @@ export const Card = ({ news }: CardProps): JSX.Element => {
                 className={cn(styles.favourite, {
                   [styles.append]: fav,
                 })}
-                onClick={!fav ? () => addToFavourite(news.id) : ''}
+                onClick={!fav ? () => addToFavourite(news.id) : null}
               />
             ) : (
               <Spinner className={styles.spinner} />
@@ -112,6 +112,7 @@ export const Card = ({ news }: CardProps): JSX.Element => {
         </div>
       </motion.div>
       <AppendNews
+        key={news.id}
         setModal={setModal}
         modal={modal}
         update={update}
@@ -120,6 +121,6 @@ export const Card = ({ news }: CardProps): JSX.Element => {
         avatar={news.avatar}
         img={news.img}
       />
-    </AnimatePresence>
+    </>
   );
 };
