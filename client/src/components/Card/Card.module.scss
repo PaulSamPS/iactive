@@ -5,7 +5,7 @@
 
 	display: grid;
 
-	width: 886px;
+	width: 100%;
 	margin: 0 auto 30px;
 	padding: 15px;
 
@@ -14,26 +14,36 @@
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
 	gap: 10px;
 	grid-template-columns: 36px 1fr auto auto;
-	grid-template-rows: 36px 55px auto;
+	grid-template-rows: 36px 20px auto;
 	grid-template-areas:
 		'avatar title buttons icons'
 		'time body body body'
 		'. image image image';
 
 	@include _laptop {
-		width: 656px;
 		grid-template-rows: 36px auto auto;
 	}
 
 	@include _tablet {
-		width: 385px;
 		grid-template-columns: 36px 1fr auto;
-		grid-template-rows: 36px auto auto auto auto;
+		grid-template-rows: 36px repeat(4, auto);
 		grid-template-areas:
 			'buttons buttons icons'
 			'avatar title title'
 			'time body body'
 			'image image image';
+	}
+
+	@include _mobileM {
+		width: 335px;
+		grid-template-columns: 36px 1fr;
+		grid-template-rows: 36px repeat(5, auto);
+		grid-template-areas:
+			'icons icons'
+			'buttons buttons'
+			'avatar title'
+			'time body'
+			'image image';
 	}
 
 	.avatar {
@@ -74,6 +84,10 @@
 		@include flex;
 		column-gap: 10px;
 		grid-area: icons;
+
+		@include _mobileM {
+			justify-self: right;
+		}
 
 		.favouriteBlock {
 			position: relative;
@@ -173,13 +187,10 @@
 	.body {
 		margin: 0;
 		grid-area: body;
+		overflow: hidden;
 
-		@include _laptop {
-			overflow: hidden;
-
-			white-space: nowrap;
-			text-overflow: ellipsis;
-		}
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 
 	.image {

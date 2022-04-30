@@ -40,24 +40,20 @@ class NewsController {
       page = page || 1
       limit = limit || 20
       let offset = page * limit - limit
-      const news = await News.findAndCountAll({ limit, offset })
+      const news = await News.findAndCountAll()
       const { count } = news
       if (sort === 'up') {
         return res.json({
           count: count,
           rows: [
-            ...news.rows.sort(function (a, b) {
-              return a.createdAt - b.createdAt || a.id - b.id
-            }),
+            ...news.rows.sort((a, b) => a.id - b.id),
           ],
         })
       } else if (sort === 'down') {
         return res.json({
           count: count,
           rows: [
-            ...news.rows.sort(function (a, b) {
-              return b.id - a.id
-            }),
+            ...news.rows.sort((a, b) => b.id - a.id),
           ],
         })
       }

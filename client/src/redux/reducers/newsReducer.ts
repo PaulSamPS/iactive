@@ -6,15 +6,19 @@ interface INews {
   isLoading: boolean;
   error: string | undefined;
   sortBy: string;
-  count: number;
+  totalCount: number;
+  currentPage: number;
+  perPage: number;
 }
 
 const initialState: INews = {
   news: [],
   isLoading: false,
   error: '',
-  sortBy: 'down',
-  count: 0,
+  sortBy: 'up',
+  totalCount: 0,
+  currentPage: 1,
+  perPage: 20,
 };
 
 export const newsReducer = createSlice({
@@ -27,7 +31,7 @@ export const newsReducer = createSlice({
     setNewsSuccess(state, action: PayloadAction<INewsInterface[]>) {
       state.isLoading = false;
       state.error = '';
-      state.news = action.payload;
+      state.news = action.payload.slice(state.perPage * state.currentPage - state.perPage, state.perPage * state.currentPage);
     },
     setNewsError(state, action: PayloadAction<string | undefined>) {
       state.isLoading = false;
@@ -37,11 +41,14 @@ export const newsReducer = createSlice({
       state.sortBy = action.payload;
     },
     setCount(state, action: PayloadAction<number>) {
-      state.count = action.payload;
+      state.totalCount = action.payload;
+    },
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
     },
   },
 });
 
-export const { setSort } = newsReducer.actions;
+export const { setSort, setCurrentPage } = newsReducer.actions;
 
 export default newsReducer.reducer;

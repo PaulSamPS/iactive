@@ -2,16 +2,20 @@
 
 .wrapper {
 	.outlet {
-		width: 990px;
+		width: 984px;
 		margin: 0 auto;
 		padding: 0 20px;
 
 		@include _laptop {
-			width: 768px;
+			width: 728px;
 		}
 
 		@include _tablet {
 			width: 425px;
+		}
+
+		@include _mobileM {
+			width: 375px;
 		}
 	}
 }

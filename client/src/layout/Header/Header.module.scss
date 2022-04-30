@@ -1,8 +1,6 @@
 @import 'src/scss/index';
 
 .wrapper {
-	padding: 20px;
-
 	background: var(--white);
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
 
@@ -22,13 +20,14 @@
 	}
 
 	.container {
-		max-width: 990px;
+		max-width: 984px;
 		margin: 0 auto;
+		padding: 20px;
 
 		@include flexBetweenCenter;
 
 		@include _laptop {
-			width: 768px;
+			width: 728px;
 		}
 
 		@include _tablet {
@@ -68,10 +67,12 @@
 		@include flexCenterCenter;
 		position: relative;
 
+		padding: 20px;
+
 		.burger {
 			position: absolute;
-			top: 10px;
-			left: 0;
+			top: 30px;
+			left: 20px;
 
 			cursor: pointer;
 		}

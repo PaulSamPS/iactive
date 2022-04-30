@@ -8,9 +8,8 @@ import { $api } from '../../http/axios';
 
 export const getNews = (sortBy?: string) => async (dispatch: AppDispatch) => {
   dispatch(newsReducer.actions.setNewsLoading());
-
   await $api
-    .get(`/api/news?limit=20&sort=${sortBy}`)
+    .get(`/api/news?sort=${sortBy}`)
     .then((res: AxiosResponse<IResponseNews>) => {
       dispatch(newsReducer.actions.setNewsSuccess(res.data.rows));
       dispatch(newsReducer.actions.setCount(res.data.count));

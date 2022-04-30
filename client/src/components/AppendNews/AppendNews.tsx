@@ -56,11 +56,11 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
     } else {
       await dispatch(createNews(formData));
     }
-    reset();
     setPreviewAvatar([]);
     setPreviewNews([]);
-    await dispatch(getNews(sortBy));
+    dispatch(getNews(sortBy));
     setModal(false);
+    reset();
   };
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
