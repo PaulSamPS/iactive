@@ -2,7 +2,9 @@
 
 ![](github/iactive.jpg)
 
-:point_right: Здесь вы можете [посмотреть](http://194.87.98.26:8080/) рабочую версиюю проекта.
+* :point_right: Здесь вы можете [посмотреть](http://194.87.98.26:8080/) рабочую версиюю проекта.
+* :file_folder: `Client` на ReactJs/TypeScript/Redux Toolkit/Module scss
+* :file_folder: `Server` на Express/Sequelize/PostgreSQL
 
 ## Описание проекта
 ![](github/appendNews.jpg)
@@ -31,6 +33,7 @@
 * Сортировка по дате добавления `вверх/вниз`
 * На мобильных устройствах поя вляется мобильное меню ![](github/mobileMenu.jpg) в него
 перемещается кнопка `Избранное` и кнопка `Добавить новость`
+* Для подключения к бд создать файл `.env` по аналогии с `.env.example`
 
 ## Запуск проекта
 
