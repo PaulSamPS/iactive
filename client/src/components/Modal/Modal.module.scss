@@ -53,9 +53,13 @@
 			min-width: 320px;
 		}
 
-		@include _mobileM {
+		@include _mobileL {
+			overflow-y: scroll;
+
 			width: 280px;
 			min-width: unset;
+			min-height: unset;
+			max-height: 700px;
 		}
 	}
 }

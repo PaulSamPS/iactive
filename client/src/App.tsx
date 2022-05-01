@@ -7,7 +7,7 @@ import { News } from './pages/News/News';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/'>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Main />} />

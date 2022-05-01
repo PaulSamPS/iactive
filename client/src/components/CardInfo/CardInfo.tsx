@@ -18,7 +18,7 @@ export const CardInfo = ({ news }: CardInfoProps): JSX.Element => {
         </div>
         <h2>{news.title}</h2>
         <div className={styles.img}>
-          <img src={news.img} alt={news.author} />
+        <img src={`${API_URL}/news/${news.img}`} alt={news.author} />
         </div>
         <p className={styles.body}>{news.body}</p>
       </div>

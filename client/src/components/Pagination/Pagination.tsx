@@ -13,13 +13,19 @@ export const Pagination = () => {
   const pages: number[] = [];
 
   createPages(pages, totalPage, currentPage);
+
+  const paginate = (page: number) => {
+    dispatch(setCurrentPage(page));
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className={styles.wrapper}>
       {pages.map((p: number) => (
         <Button
           key={p}
           appearance='transparent'
-          onClick={() => dispatch(setCurrentPage(p))}
+          onClick={() => paginate(p)}
           className={cn(styles.paginateBtn, {
             [styles.active]: currentPage == p,
           })}

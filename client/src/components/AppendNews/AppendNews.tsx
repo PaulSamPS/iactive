@@ -27,40 +27,45 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
     reset,
   } = useForm<IFormdataInterface>({ mode: 'onChange' });
 
-  const onSubmit = async (data: IFormdataInterface) => {
+  const onSubmit = (data: IFormdataInterface) => {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('author', data.author);
     formData.append('body', data.body);
+
     if (filesAvatar) {
       if (update) {
         formData.append('avatarOld', avatar as unknown as Blob);
       }
+
       formData.append('avatar', filesAvatar[0]);
     } else {
       formData.append('avatar', '');
     }
+
     if (filesNews) {
       if (update) {
         formData.append('imgOld', img as unknown as Blob);
       }
+
       formData.append('img', filesNews[0]);
     } else {
       formData.append('img', '');
     }
+
     if (update) {
-      await dispatch(updateNews(formData, newsId));
+      dispatch(updateNews(formData, newsId));
       if (setUpdate) {
         setUpdate(false);
       }
     } else {
-      await dispatch(createNews(formData));
+      dispatch(createNews(formData));
     }
+    setModal(false);
+    reset();
     setPreviewAvatar([]);
     setPreviewNews([]);
     dispatch(getNews(sortBy));
-    setModal(false);
-    reset();
   };
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
