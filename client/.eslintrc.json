@@ -33,6 +33,7 @@
         "indent": "off",
         "space-before-function-paren": "off",
         "react/display-name": "off",
-        "operator-linebreak": "off"
+        "operator-linebreak": "off",
+        "no-empty-pattern": "off"
     }
 }

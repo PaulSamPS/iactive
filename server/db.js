@@ -1,12 +1,7 @@
-const { Sequelize } = require('sequelize')
+const mongoose = require('mongoose')
 
-module.exports = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    dialect: 'postgres',
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-  }
-)
+const connectDb = () => {
+    mongoose.connect(process.env.MONGO_CONNECT_URL)
+}
+
+module.exports = connectDb

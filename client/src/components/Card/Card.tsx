@@ -19,7 +19,6 @@ import moment from 'moment';
 import styles from './Card.module.scss';
 
 export const Card = ({ news }: CardProps): JSX.Element => {
-  const { sortBy } = useAppSelector((state) => state.newsReducer);
   const { favouriteNews } = useAppSelector((state) => state.favouriteReducer);
   const [modal, setModal] = React.useState<boolean>(false);
   const [update, setUpdate] = React.useState<boolean>(false);
@@ -31,16 +30,16 @@ export const Card = ({ news }: CardProps): JSX.Element => {
   const time = moment(news.createdAt).format('HH:mm');
   const date = moment(news.createdAt).format('D.MM.y');
   const postedAgo = moment(news.createdAt).fromNow();
-  const fav = favouriteNews && favouriteNews.map((f) => f.id).includes(news.id);
+  const fav = favouriteNews && favouriteNews.map((f) => f._id).includes(news._id);
 
-  const addToFavourite = (newsId: number) => {
+  const addToFavourite = (newsId: string) => {
     setIsLoading(true);
-    dispatch(addToFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
+    dispatch(addToFavouriteNews(newsId)).then(() => setIsLoading(false));
   };
 
-  const removeFromFavourite = (newsId: number) => {
+  const removeFromFavourite = (newsId: string) => {
     setIsLoading(true);
-    dispatch(removeFromFavouriteNews(newsId, sortBy)).then(() => setIsLoading(false));
+    dispatch(removeFromFavouriteNews(newsId)).then(() => setIsLoading(false));
   };
 
   const handleUpdate = () => {
@@ -48,8 +47,8 @@ export const Card = ({ news }: CardProps): JSX.Element => {
     setUpdate(true);
   };
 
-  const handleDelete = (newsId: number, avatar: string, img: string) => {
-    dispatch(deleteNews(newsId, avatar, img, sortBy));
+  const handleDelete = (newsId: string, avatar: string, img: string) => {
+    dispatch(deleteNews(newsId, avatar, img));
   };
 
   return (
@@ -79,7 +78,7 @@ export const Card = ({ news }: CardProps): JSX.Element => {
             <SettingsIcon />
             <div className={cn(styles.dropdownContent, styles.settings)}>
               <span onClick={handleUpdate}>Изменить</span>
-              <span onClick={() => handleDelete(news.id, news.avatar, news.img)}>Удалить</span>
+              <span onClick={() => handleDelete(news._id, news.avatar, news.img)}>Удалить</span>
             </div>
           </div>
           <RectangleIcon />
@@ -89,14 +88,14 @@ export const Card = ({ news }: CardProps): JSX.Element => {
                 className={cn(styles.favourite, {
                   [styles.append]: fav,
                 })}
-                onClick={!fav ? () => addToFavourite(news.id) : null}
+                onClick={!fav ? () => addToFavourite(news._id) : null}
               />
             ) : (
               <Spinner className={styles.spinner} />
             )}
             {fav && (
               <div className={styles.dropdownContent}>
-                <span onClick={() => removeFromFavourite(news.id)}>Удалить из избраного</span>
+                <span onClick={() => removeFromFavourite(news._id)}>Удалить из избраного</span>
               </div>
             )}
           </div>
@@ -104,7 +103,7 @@ export const Card = ({ news }: CardProps): JSX.Element => {
         <span className={styles.time}>{time}</span>
         <p className={styles.body}>{news.body}</p>
         <div className={styles.image}>
-          <span className={styles.next} onClick={() => navigate(`/news/${news.id}`)}>
+          <span className={styles.next} onClick={() => navigate(`/news/${news._id}`)}>
             Далее
           </span>
           <img src={`${API_URL}/news/${news.img}`} alt={news.author} />
@@ -112,12 +111,12 @@ export const Card = ({ news }: CardProps): JSX.Element => {
         </div>
       </motion.div>
       <AppendNews
-        key={news.id}
+        key={news._id}
         setModal={setModal}
         modal={modal}
         update={update}
         setUpdate={setUpdate}
-        newsId={news.id}
+        newsId={news._id}
         avatar={news.avatar}
         img={news.img}
       />

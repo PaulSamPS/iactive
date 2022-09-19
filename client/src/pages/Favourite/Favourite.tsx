@@ -31,7 +31,11 @@ export const Favourite = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <BackBtn />
-      {favouriteNews && favouriteNews.map((f) => <Card key={f.id} news={f} />)}
+      {favouriteNews &&
+        favouriteNews
+          .slice()
+          .reverse()
+          .map((f) => <Card key={f._id} news={f} />)}
     </div>
   );
 };

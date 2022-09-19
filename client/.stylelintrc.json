@@ -1,12 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-order-config-standard"
-],
-    "plugins": [
-      "stylelint-order",
-      "stylelint-scss"
-],
+  "extends": "stylelint-config-standard-scss",
     "rules": {
       "indentation": "tab",
       "color-hex-case": "upper",

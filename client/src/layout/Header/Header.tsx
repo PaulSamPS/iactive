@@ -5,8 +5,8 @@ import { ReactComponent as BurgerIcon } from '../../helpers/icons/burger.svg';
 import { useNavigate } from 'react-router-dom';
 import { AppendNews } from '../../components/AppendNews/AppendNews';
 import styles from './Header.module.scss';
-import { useAppDispatch } from '../../hooks/redux';
-import { getFavouriteNews } from '../../redux/actions/favouriteAction';
+// import { useAppDispatch } from '../../hooks/redux';
+// import { getFavouriteNews } from '../../redux/actions/favouriteAction';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MobileMenu } from '../../components/MobileMenu/MobileMenu';
@@ -16,7 +16,7 @@ export const Header = (): JSX.Element => {
   const [screenWidth, setScreenWidth] = React.useState<number>(0);
   const [modalMenu, setModalMenu] = React.useState<boolean>(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const variants = {
     open: { opacity: 1, x: 0 },
@@ -33,7 +33,7 @@ export const Header = (): JSX.Element => {
   };
 
   const handleClick = () => {
-    dispatch(getFavouriteNews());
+    // dispatch(getFavouriteNews());
     navigate('/');
   };
 

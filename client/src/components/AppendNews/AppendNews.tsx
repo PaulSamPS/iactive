@@ -7,7 +7,7 @@ import { IFormdataInterface } from '../../interfaces/formdata.interface';
 import { AppendNewsProps } from './AppendNews.props';
 import { Textarea } from '../Textarea/Textarea';
 import { IAppendNewsAvatarInterface, IAppendNewsInterface } from '../../interfaces/AppendNews.interface';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { createNews, getNews, updateNews } from '../../redux/actions/newsAction';
 import cn from 'classnames';
 import styles from './AppendNews.module.scss';
@@ -17,7 +17,6 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
   const [filesNews, setFilesNews] = React.useState<FileList | null>(null);
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendNewsAvatarInterface[]>([]);
   const [previewNews, setPreviewNews] = React.useState<IAppendNewsInterface[]>([]);
-  const { sortBy } = useAppSelector((state) => state.newsReducer);
   const dispatch = useAppDispatch();
 
   const {
@@ -65,7 +64,7 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
     reset();
     setPreviewAvatar([]);
     setPreviewNews([]);
-    dispatch(getNews(sortBy));
+    dispatch(getNews());
   };
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {

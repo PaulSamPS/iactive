@@ -1,5 +1,5 @@
 export interface IFavouriteInterface {
-  id: number;
+  _id: string;
   title: string;
   author: string;
   body: string;
@@ -11,6 +11,6 @@ export interface IFavouriteInterface {
 }
 
 export interface IResponseFavouriteNews {
-  id: number;
+  _id: string;
   news: IFavouriteInterface[];
 }

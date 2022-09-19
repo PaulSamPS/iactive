@@ -1,5 +1,5 @@
 export interface INewsInterface {
-  id: number;
+  _id: string;
   title: string;
   author: string;
   body: string;
@@ -10,7 +10,3 @@ export interface INewsInterface {
   updatedAt: string;
 }
 
-export interface IResponseNews {
-  count: number;
-  rows: INewsInterface[];
-}

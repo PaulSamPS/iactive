@@ -1,27 +1,25 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getNews } from '../../redux/actions/newsAction';
 import { Card } from '../../components/Card/Card';
-import { Sort } from '../../components/Sort/Sort';
-import { getFavouriteNews } from '../../redux/actions/favouriteAction';
-import { Pagination } from '../../components/Pagination/Pagination';
 import styles from './Main.module.scss';
+import { SocketContext } from '../../context/socketContext';
+import { setNewsSuccess } from '../../redux/reducers/newsReducer';
 
 export const Main = (): JSX.Element => {
+  const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
-  const { news, sortBy, currentPage } = useAppSelector((state) => state.newsReducer);
+  const { news } = useAppSelector((state) => state.newsReducer);
 
   React.useEffect(() => {
-    dispatch(getNews(sortBy));
-    dispatch(getFavouriteNews());
-  }, [sortBy, currentPage]);
+    socket?.emit('news-all:get');
+    socket?.on('news-all:sent', ({ news }) => {
+      dispatch(setNewsSuccess(news));
+    });
 
-  React.useEffect(() => {
-    const timer = setInterval(async () => {
-      await dispatch(getNews(sortBy));
+    setInterval(() => {
+      socket?.emit('news-all:get');
     }, 5000);
-    return () => clearInterval(timer);
-  }, [sortBy, currentPage]);
+  }, [socket]);
 
   if (news.length <= 0) {
     return <h2 className={styles.notFound}>Нет новостей...</h2>;
@@ -29,11 +27,12 @@ export const Main = (): JSX.Element => {
 
   return (
     <>
-      <Sort />
-      {news.map((n) => (
-        <Card key={n.id} news={n} />
-      ))}
-      <Pagination />
+      {news
+        .slice()
+        .reverse()
+        .map((n) => (
+          <Card key={n._id} news={n} />
+        ))}
     </>
   );
 };
