@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardInfoProps } from './CardInfo.props';
-import { BackBtn } from '../BackBtn/BackBtn';
+import { BackBtn } from '../Ui/BackBtn/BackBtn';
 import { API_URL } from '../../http/axios';
 import moment from 'moment';
 import styles from './CardInfo.module.scss';
@@ -18,7 +18,7 @@ export const CardInfo = ({ news }: CardInfoProps): JSX.Element => {
         </div>
         <h2>{news.title}</h2>
         <div className={styles.img}>
-        <img src={`${API_URL}/news/${news.img}`} alt={news.author} />
+          <img src={`${API_URL}/news/${news.img}`} alt={news.author} />
         </div>
         <p className={styles.body}>{news.body}</p>
       </div>

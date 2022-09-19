@@ -1,23 +1,32 @@
 import React, { ChangeEvent } from 'react';
-import { Input } from '../Input/Input';
-import { Button } from '../Button/Button';
+import { Input } from '../Ui/Input/Input';
+import { Button } from '../Ui/Button/Button';
 import { Modal } from '../Modal/Modal';
 import { useForm } from 'react-hook-form';
 import { IFormdataInterface } from '../../interfaces/formdata.interface';
 import { AppendNewsProps } from './AppendNews.props';
-import { Textarea } from '../Textarea/Textarea';
-import { IAppendNewsAvatarInterface, IAppendNewsInterface } from '../../interfaces/AppendNews.interface';
-import { useAppDispatch } from '../../hooks/redux';
-import { createNews, getNews, updateNews } from '../../redux/actions/newsAction';
+import { Textarea } from '../Ui/Textarea/Textarea';
+import {
+  IAppendNewsAvatarInterface,
+  IAppendNewsInterface,
+} from '../../interfaces/AppendNews.interface';
+import { createNews, updateNews } from '../../redux/actions/newsAction';
 import cn from 'classnames';
 import styles from './AppendNews.module.scss';
 
-export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUpdate }: AppendNewsProps): JSX.Element => {
+export const AppendNews = ({
+  modal,
+  setModal,
+  update,
+  newsId,
+  avatar,
+  img,
+  setUpdate,
+}: AppendNewsProps): JSX.Element => {
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const [filesNews, setFilesNews] = React.useState<FileList | null>(null);
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendNewsAvatarInterface[]>([]);
   const [previewNews, setPreviewNews] = React.useState<IAppendNewsInterface[]>([]);
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -26,7 +35,7 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
     reset,
   } = useForm<IFormdataInterface>({ mode: 'onChange' });
 
-  const onSubmit = (data: IFormdataInterface) => {
+  const onSubmit = async (data: IFormdataInterface) => {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('author', data.author);
@@ -53,18 +62,17 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
     }
 
     if (update) {
-      dispatch(updateNews(formData, newsId));
+      await updateNews(formData, newsId);
       if (setUpdate) {
         setUpdate(false);
       }
     } else {
-      dispatch(createNews(formData));
+      await createNews(formData);
     }
     setModal(false);
     reset();
     setPreviewAvatar([]);
     setPreviewNews([]);
-    dispatch(getNews());
   };
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +133,9 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
         <label htmlFor='author'>
           Автор новости:
           <Input
-            {...register('author', { required: { value: !update, message: 'Введите автора новости' } })}
+            {...register('author', {
+              required: { value: !update, message: 'Введите автора новости' },
+            })}
             placeholder='Укажите автора новости'
             type='text'
             error={errors.author}
@@ -134,7 +144,9 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
         <label htmlFor='title'>
           Название:
           <Input
-            {...register('title', { required: { value: !update, message: 'Введите название новости' } })}
+            {...register('title', {
+              required: { value: !update, message: 'Введите название новости' },
+            })}
             placeholder='Введите название новости'
             type='text'
             error={errors.title}
@@ -158,7 +170,9 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
           <label htmlFor='img'>
             Изображение:
             <Input
-              {...register('img', { required: { value: !update, message: 'Выберите изображение' } })}
+              {...register('img', {
+                required: { value: !update, message: 'Выберите изображение' },
+              })}
               placeholder='Выберите изображение'
               type='file'
               id='img'
@@ -180,7 +194,9 @@ export const AppendNews = ({ modal, setModal, update, newsId, avatar, img, setUp
         <label htmlFor='body' className={styles.labelTextarea}>
           Текст новости:
           <Textarea
-            {...register('body', { required: { value: !update, message: 'Введите текст новости' } })}
+            {...register('body', {
+              required: { value: !update, message: 'Введите текст новости' },
+            })}
             className={styles.body}
             placeholder='Текст новости'
             error={errors.body}

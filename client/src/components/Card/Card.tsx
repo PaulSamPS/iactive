@@ -1,17 +1,18 @@
 import React from 'react';
 import { CardProps } from './Card.props';
-import { Button } from '../Button/Button';
+import { Button } from '../Ui/Button/Button';
 import { ReactComponent as ArrowIcon } from '../../helpers/icons/arrowRight.svg';
 import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg';
 import { ReactComponent as RectangleIcon } from '../../helpers/icons/rectangle.svg';
 import { ReactComponent as StarIcon } from '../../helpers/icons/star.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addToFavouriteNews, removeFromFavouriteNews } from '../../redux/actions/favouriteAction';
+import { SocketContext } from '../../context/socketContext';
 import { AppendNews } from '../AppendNews/AppendNews';
 import { deleteNews } from '../../redux/actions/newsAction';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '../Ui/Spinner/Spinner';
 import { API_URL } from '../../http/axios';
 import 'moment/locale/ru';
 import cn from 'classnames';
@@ -19,6 +20,7 @@ import moment from 'moment';
 import styles from './Card.module.scss';
 
 export const Card = ({ news }: CardProps): JSX.Element => {
+  const socket = React.useContext(SocketContext);
   const { favouriteNews } = useAppSelector((state) => state.favouriteReducer);
   const [modal, setModal] = React.useState<boolean>(false);
   const [update, setUpdate] = React.useState<boolean>(false);
@@ -32,7 +34,7 @@ export const Card = ({ news }: CardProps): JSX.Element => {
   const postedAgo = moment(news.createdAt).fromNow();
   const fav = favouriteNews && favouriteNews.map((f) => f._id).includes(news._id);
 
-  const addToFavourite = (newsId: string) => {
+  const addToFavourite = async (newsId: string) => {
     setIsLoading(true);
     dispatch(addToFavouriteNews(newsId)).then(() => setIsLoading(false));
   };
@@ -48,7 +50,9 @@ export const Card = ({ news }: CardProps): JSX.Element => {
   };
 
   const handleDelete = (newsId: string, avatar: string, img: string) => {
-    dispatch(deleteNews(newsId, avatar, img));
+    deleteNews(newsId, avatar, img).then(() => {
+      socket?.emit('news-all:get');
+    });
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MobileMenuProps } from './MobileMenu.props';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
-import { Button } from '../Button/Button';
+import { Button } from '../Ui/Button/Button';
 import { ReactComponent as FavoriteIcon } from '../../helpers/icons/star.svg';
 import { useNavigate } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
@@ -20,7 +20,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ setModalMenu, setModal }
   };
 
   return (
-    <div className={styles.wrapper} onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+    <div
+      className={styles.wrapper}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+    >
       <CloseIcon onClick={() => setModalMenu(false)} />
       <Button appearance='primary' onClick={append}>
         Добавить новость

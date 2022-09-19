@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../components/Button/Button';
+import { Button } from '../../components/Ui/Button/Button';
 import { ReactComponent as FavoriteIcon } from '../../helpers/icons/star.svg';
 import { ReactComponent as BurgerIcon } from '../../helpers/icons/burger.svg';
 import { useNavigate } from 'react-router-dom';

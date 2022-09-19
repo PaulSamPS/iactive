@@ -9,8 +9,9 @@
 ![](github/iactive.jpg)
 
 * :point_right: Здесь вы можете [посмотреть](http://194.87.98.26:8080/) рабочую версиюю проекта.
-* :file_folder: `Client` на ReactJs/TypeScript/Redux Toolkit/Module scss
-* :file_folder: `Server` на Express/Sequelize/PostgreSQL
+* :file_folder: `Client` на ReactJs/TypeScript/Redux Toolkit/Socket io
+* :file_folder: `Server` на Express/MongoDb/Socket i
+* o
 
 ## Описание проекта
 ![](github/appendNews.jpg)
@@ -33,8 +34,7 @@
 * При нажатии на кнопку `Далее`
 осуществляется переход к страницу сполной информацией карточки
 
-* Избранное хранится к куках, срок жизни кук один год. 
-* Каждая кука записывается в бд.
+* Избранное хранится к куках, срок жизни кук один год.
 * Для каждого пользователя своё избранное.
 * Сортировка по дате добавления `вверх/вниз`
 * На мобильных устройствах поя вляется мобильное меню ![](github/mobileMenu.jpg) в него

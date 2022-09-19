@@ -2,8 +2,8 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getFavouriteNews } from '../../redux/actions/favouriteAction';
 import { Card } from '../../components/Card/Card';
-import { Spinner } from '../../components/Spinner/Spinner';
-import { BackBtn } from '../../components/BackBtn/BackBtn';
+import { Spinner } from '../../components/Ui/Spinner/Spinner';
+import { BackBtn } from '../../components/Ui/BackBtn/BackBtn';
 import styles from './Favourite.module.scss';
 
 export const Favourite = (): JSX.Element => {

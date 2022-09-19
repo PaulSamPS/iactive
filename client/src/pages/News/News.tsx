@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getOneNews } from '../../redux/actions/newsAction';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { CardInfo } from '../../components/CardInfo/CardInfo';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Spinner } from '../../components/Ui/Spinner/Spinner';
 
 export const News = () => {
   const { id } = useParams();
