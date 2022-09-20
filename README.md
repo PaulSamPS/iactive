@@ -1,17 +1,12 @@
 # IActive react-app
 
-* [Демо](#демо)
 * [Описание проекта](#описание-проекта)
 * [Запуск проекта](#запуск-проекта)
 
-## Демо
-
 ![](github/iactive.jpg)
 
-* :point_right: Здесь вы можете [посмотреть](http://194.87.98.26:8080/) рабочую версиюю проекта.
 * :file_folder: `Client` на ReactJs/TypeScript/Redux Toolkit/Socket io
-* :file_folder: `Server` на Express/MongoDb/Socket i
-* o
+* :file_folder: `Server` на Express/MongoDb/Socket io
 
 ## Описание проекта
 ![](github/appendNews.jpg)
